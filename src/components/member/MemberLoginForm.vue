@@ -32,6 +32,10 @@ export default {
   methods: {
     ...mapActions(['login']),
     doLogin: function () {
+      if (!this.id || !this.password) {
+        alert('아이디와 패스워드를 입력하세요');
+        return;
+      }
       console.log('login');
       this.login({ id: this.id, password: this.password });
       console.log(this.loginResult);

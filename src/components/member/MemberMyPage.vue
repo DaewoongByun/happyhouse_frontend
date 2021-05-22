@@ -28,25 +28,22 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 #my-page {
   margin-top: 30px;
   height: 600px;
 }
 .my-page__nav {
   flex-direction: column;
-  background-color: blue;
   height: 100%;
   flex: 1;
   justify-content: flex-start;
 }
 .my-page__nav__item {
-  background-color: teal;
   height: 50px;
   width: 100%;
 }
 .my-page__content {
-  background-color: yellow;
   height: 100%;
   flex: 3;
 }

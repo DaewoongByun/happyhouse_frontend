@@ -41,7 +41,23 @@ export default {
     };
   },
   methods: {
+    emptyCheck: function () {
+      if (
+        !this.id ||
+        !this.password ||
+        !this.passwordConfirm ||
+        !this.name ||
+        !this.email ||
+        !this.tel
+      )
+        return false;
+      return true;
+    },
     regist: function () {
+      if (!this.emptyCheck()) {
+        alert('모든 항목을 입력하세요');
+        return;
+      }
       axios({
         method: 'post',
         url: 'http://localhost:8000/member/regist',
@@ -64,7 +80,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 #regist-form {
   height: 600px;
   margin-top: 20px;

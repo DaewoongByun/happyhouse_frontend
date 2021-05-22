@@ -4,16 +4,18 @@
       <div>SSAFY</div>
     </div>
     <div class="header__title">
-      <div>HAPPY HOUSE</div>
+      <div @click="$router.push('/')" class="header__title__text">HAPPY HOUSE</div>
     </div>
     <div class="header__member">
       <template v-if="!loginUser.id">
-        <div @click="$router.push('/member/login')">로그인</div>
-        <div @click="$router.push('/member/regist')">회원가입</div>
+        <div class="header__member__item" @click="$router.push('/member/login')">로그인</div>
+        <div class="header__member__item" @click="$router.push('/member/regist')">회원가입</div>
       </template>
       <template v-if="loginUser.id">
-        <div>{{ loginUser.id }}님 안녕하세요</div>
-        <div @click="doLogout">로그아웃</div>
+        <div class="header__member__item" @click.prevent="$router.push('/member/mypage')">
+          {{ loginUser.id }}
+        </div>
+        <div class="header__member__item" @click.prevent="doLogout">로그아웃</div>
       </template>
     </div>
   </div>
@@ -56,12 +58,26 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 40px;
+  font-weight: 600;
+}
+.header__title__text {
+  cursor: pointer;
 }
 .header__member {
   flex: 2;
   height: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-end;
+  align-items: flex-end;
+  flex-direction: column;
+  font-size: 13px;
+}
+.header__member__item {
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+.header__member__item:hover {
+  color: #758c61;
 }
 </style>
