@@ -1,32 +1,42 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <Header />
+    <NavBar />
     <router-view />
   </div>
 </template>
+<script>
+import Header from './components/Header';
+import NavBar from './components/NavBar';
+import { mapActions } from 'vuex';
+export default {
+  components: {
+    Header,
+    NavBar,
+  },
+  created() {
+    const loginUser = JSON.parse(localStorage.getItem('loginUser'));
+    if (loginUser) {
+      this.setLogin(loginUser);
+    }
+  },
+  methods: {
+    ...mapActions(['setLogin']),
+  },
+};
+</script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  height: auto;
 }
-
-#nav {
-  padding: 30px;
+.container {
+  margin-left: 10%;
+  margin-right: 10%;
 }
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+.flex-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

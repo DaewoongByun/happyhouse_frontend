@@ -1,0 +1,53 @@
+<template>
+  <div id="my-page" class="container flex-box">
+    <div class="my-page__nav flex-box">
+      <div class="my-page__nav__item flex-box" @click="index = 1">회원 정보 수정</div>
+      <div class="my-page__nav__item flex-box" @click="index = 2">비밀번호 변경</div>
+    </div>
+    <div class="my-page__content flex-box">
+      <my-page-default v-if="index === 1"></my-page-default>
+      <my-page-pw v-if="index === 2"></my-page-pw>
+    </div>
+  </div>
+</template>
+
+<script>
+import MyPageDefault from './mypage/MemberMyPageDefault';
+import MyPagePw from './mypage/MemberMyPagePw';
+export default {
+  name: 'MemberMyPage',
+  data() {
+    return {
+      index: 1,
+    };
+  },
+  components: {
+    MyPageDefault,
+    MyPagePw,
+  },
+};
+</script>
+
+<style>
+#my-page {
+  margin-top: 30px;
+  height: 600px;
+}
+.my-page__nav {
+  flex-direction: column;
+  background-color: blue;
+  height: 100%;
+  flex: 1;
+  justify-content: flex-start;
+}
+.my-page__nav__item {
+  background-color: teal;
+  height: 50px;
+  width: 100%;
+}
+.my-page__content {
+  background-color: yellow;
+  height: 100%;
+  flex: 3;
+}
+</style>

@@ -1,0 +1,90 @@
+<template>
+  <div id="regist-form" class="container flex-box">
+    <div class="regist-box flex-box">
+      <div class="input-container flex-box">
+        <input type="text" placeholder="아이디" v-model="id" />
+      </div>
+      <div class="input-container flex-box">
+        <input type="text" placeholder="이름" v-model="name" />
+      </div>
+      <div class="input-container flex-box">
+        <input type="text" placeholder="비밀번호" v-model="password" />
+      </div>
+      <div class="input-container flex-box">
+        <input type="text" placeholder="비밀번호 확인" v-model="passwordConfirm" />
+      </div>
+      <div class="input-container flex-box">
+        <input type="text" placeholder="휴대전화 번호" v-model="tel" />
+      </div>
+      <div class="input-container flex-box">
+        <input type="text" placeholder="이메일" v-model="email" />
+      </div>
+      <div class="button-container flex-box">
+        <button class="button" @click="regist">회원 가입</button>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import axios from 'axios';
+export default {
+  name: 'MemberRegistForm',
+  data() {
+    return {
+      id: '',
+      password: '',
+      passwordConfirm: '',
+      name: '',
+      email: '',
+      tel: '',
+    };
+  },
+  methods: {
+    regist: function () {
+      axios({
+        method: 'post',
+        url: 'http://localhost:8000/member/regist',
+        data: {
+          id: this.id,
+          password: this.password,
+          name: this.name,
+          email: this.email,
+          tel: this.tel,
+        },
+      })
+        .then(function (response) {
+          console.dir(response);
+        })
+        .catch(function (error) {
+          console.dir(error);
+        });
+    },
+  },
+};
+</script>
+
+<style>
+#regist-form {
+  height: 600px;
+  margin-top: 20px;
+}
+.regist-box {
+  flex-direction: column;
+  width: 400px;
+  height: 600px;
+  justify-content: space-between;
+}
+.input-container {
+  flex: 1;
+  width: 100%;
+}
+.button-container {
+  flex: 1;
+  width: 100%;
+}
+input {
+  width: 90%;
+  height: 30px;
+}
+</style>
