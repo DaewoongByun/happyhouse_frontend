@@ -69,10 +69,13 @@ export default {
           tel: this.tel,
         },
       })
-        .then(function (response) {
+        .then((response) => {
+          alert('회원가입 성공');
+          console.log(this.$router.push('/'));
           console.dir(response);
         })
-        .catch(function (error) {
+        .catch((error) => {
+          alert('가입실패');
           console.dir(error);
         });
     },

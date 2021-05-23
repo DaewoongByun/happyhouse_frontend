@@ -7,7 +7,7 @@
             icon="circle-fill"
             aria-hidden="true"
             v-if="isTrade"
-            style="color: yellow"
+            style="color: darkseagreen"
           ></b-icon>
           <b-icon icon="circle" aria-hidden="true" v-if="!isTrade"></b-icon>
         </div>
@@ -19,7 +19,7 @@
             icon="circle-fill"
             aria-hidden="true"
             v-if="isRent"
-            style="color: yellow"
+            style="color: darkseagreen"
           ></b-icon>
           <b-icon icon="circle" aria-hidden="true" v-if="!isRent"></b-icon>
         </div>
@@ -103,6 +103,8 @@ export default {
   width: 100%;
   font-size: 18px;
   margin-bottom: 10px;
+  font-weight: 600;
+  padding: 10px;
 }
 .deals {
   flex-direction: column;

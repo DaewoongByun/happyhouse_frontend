@@ -2,7 +2,7 @@
   <div id="house-info-item" class="flex-box">
     <div class="name-container flex-box" @click="showDeals">
       <div class="name">{{ houseinfo.aptName }}</div>
-      <div class="buildyear">{{ houseinfo.buildYear }}</div>
+      <div class="buildyear">건축년도: {{ houseinfo.buildYear }}</div>
     </div>
     <div class="icon-container flex-box">
       <div class="icon">
@@ -36,7 +36,7 @@ export default {
 <style scoped>
 #house-info-item {
   width: 100%;
-  height: 100px;
+  height: 120px;
   flex-direction: column;
   border-bottom: 1px solid black;
 }
@@ -50,6 +50,7 @@ export default {
 .name {
   width: 100%;
   font-size: 20px;
+  font-weight: 600;
 }
 .buildyear {
   width: 100%;

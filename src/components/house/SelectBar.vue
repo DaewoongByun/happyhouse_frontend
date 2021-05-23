@@ -1,7 +1,7 @@
 <template>
   <div id="select-bar" class="flex-box">
     <div class="title">상세검색</div>
-    <div class="select">
+    <div class="select flex-box">
       <label
         ><input type="checkbox" value="mart" @change="change" v-model="rank" ref="mart" />
         대형마트</label
@@ -31,10 +31,16 @@
         병원</label
       >
     </div>
-    <div class="rank">
-      <span>1순위 : {{ category[rank[0]] }}</span>
-      <span>2순위 : {{ category[rank[1]] }}</span>
-      <span>3순위 : {{ category[rank[2]] }}</span>
+    <div class="rank flex-box">
+      <span
+        >1순위 : <span class="category-name">{{ category[rank[0]] }}</span></span
+      >
+      <span
+        >2순위 : <span class="category-name">{{ category[rank[1]] }}</span></span
+      >
+      <span
+        >3순위 : <span class="category-name">{{ category[rank[2]] }}</span></span
+      >
     </div>
   </div>
 </template>
@@ -82,5 +88,23 @@ export default {
 #select-bar {
   flex-direction: column;
   height: 100px;
+  width: 100%;
+  justify-content: space-between;
+}
+.title {
+  font-size: 25px;
+  font-weight: 700;
+}
+.select {
+  width: 100%;
+  justify-content: space-around;
+}
+.rank {
+  width: 80%;
+  justify-content: space-around;
+}
+.category-name {
+  font-weight: 600;
+  font-size: 18px;
 }
 </style>

@@ -17,7 +17,9 @@
           <house-deal />
         </div>
       </div>
-      <div class="house__mid__map flex-box"></div>
+      <div class="house__mid__map flex-box">
+        <Map />
+      </div>
     </div>
     <div class="house__bottom flex-box">
       <div class="house__bottom__chart flex-box"></div>
@@ -30,6 +32,7 @@ import SearchBar from '../components/home/SearchBar.vue';
 import SelectBar from '../components/house/SelectBar.vue';
 import HouseInfo from '../components/house/HouseInfo.vue';
 import HouseDeal from '../components/house/HouseDeal.vue';
+import Map from '../components/house/Map.vue';
 export default {
   name: 'House',
   components: {
@@ -37,6 +40,7 @@ export default {
     SelectBar,
     HouseInfo,
     HouseDeal,
+    Map,
   },
 };
 </script>
@@ -49,7 +53,7 @@ export default {
 }
 .house__top {
   width: 100%;
-  height: 100px;
+  height: 150px;
 }
 .house__top__searchBar {
   height: 100%;
@@ -79,6 +83,7 @@ export default {
 }
 .house__mid__map {
   flex: 6;
+  height: 100%;
 }
 .house__bottom {
   width: 100%;

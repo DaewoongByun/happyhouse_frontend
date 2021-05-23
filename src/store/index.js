@@ -14,6 +14,7 @@ export default new Vuex.Store({
     houseinfos: [],
     housedeals: [],
     selectedHouseName: '',
+    isLoading: false,
   },
   getters: {
     loginUser: (state) => {
@@ -30,6 +31,9 @@ export default new Vuex.Store({
     },
     selectedHouseName: (state) => {
       return state.selectedHouseName;
+    },
+    isLoading: (state) => {
+      return state.isLoading;
     },
   },
   mutations: {
@@ -50,6 +54,8 @@ export default new Vuex.Store({
     },
     SET_HOUSEINFOS(state, data) {
       state.houseinfos = data.houseinfo;
+      state.housedeals = [];
+      state.selectedHouseName = '';
       console.log(state.houseinfos);
     },
     SET_HOUSE_DEALS(state, data) {
@@ -64,6 +70,7 @@ export default new Vuex.Store({
       commit('SET_HOUSE_DEALS', data);
     },
     setHouseinfos({ commit, state }, search) {
+      state.isLoading = true;
       const url = `http://localhost:8000/search/apt/${search.code}/${search.dong}`;
       axios({
         method: 'get',
@@ -74,9 +81,11 @@ export default new Vuex.Store({
       })
         .then((response) => {
           commit('SET_HOUSEINFOS', response.data);
+          state.isLoading = false;
         })
         .catch((error) => {
           console.log(error);
+          state.isLoading = false;
         });
     },
     setLogin({ commit }, loginUser) {

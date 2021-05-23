@@ -1,7 +1,7 @@
 <template>
   <div id="header" class="container">
     <div class="header__logo">
-      <div>SSAFY</div>
+      <div><img src="../../assets/logo.png" /></div>
     </div>
     <div class="header__title">
       <div @click="$router.push('/')" class="header__title__text">HAPPY HOUSE</div>
@@ -79,5 +79,8 @@ export default {
 }
 .header__member__item:hover {
   color: #758c61;
+}
+img {
+  height: 90px;
 }
 </style>

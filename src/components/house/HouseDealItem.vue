@@ -4,6 +4,7 @@
       <div class="key" v-if="dealType == 'trade'">거래 금액 :</div>
       <div class="key" v-if="dealType == 'rent'">보증금 :</div>
       <div class="value">{{ housedeal.dealAmount }}</div>
+      <div class="small">(만원)</div>
     </div>
     <div class="price-container flex-box" v-if="housedeal.rentMoney > 0">
       <div class="key" v-if="dealType == 'rent'">월세 :</div>
@@ -39,10 +40,13 @@ export default {
 <style scoped>
 #house-deal-item {
   width: 100%;
-  height: 100px;
+  height: 120px;
   flex-direction: column;
   border-bottom: 1px solid black;
   padding: 5px;
   align-items: flex-start;
+}
+.small {
+  font-size: 12px;
 }
 </style>

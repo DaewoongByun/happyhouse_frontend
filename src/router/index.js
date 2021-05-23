@@ -5,6 +5,7 @@ import MemberLoginForm from '../components/member/MemberLoginForm';
 import MemberRegistForm from '../components/member/MemberRegistForm';
 import MemberMyPage from '../components/member/MemberMyPage';
 import House from '../views/House';
+import Notice from '../views/Notice';
 
 Vue.use(VueRouter);
 
@@ -33,6 +34,11 @@ const routes = [
     path: '/house',
     name: 'House',
     component: House,
+  },
+  {
+    path: '/notice',
+    name: 'Notice',
+    component: Notice,
   },
 ];
 
