@@ -30,6 +30,7 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
 * {
   font-family: 'Nanum Gothic', sans-serif;
+  box-sizing: border-box;
 }
 #app {
   height: auto;
@@ -60,5 +61,20 @@ export default {
 }
 .danger {
   background-color: #e93b81;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  background: #ffffff;
+}
+*::-webkit-scrollbar-thumb {
+  border-radius: 3.5px;
+  background-color: #ced4da;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #adb5bd;
+}
+*::-webkit-scrollbar-track {
+  background: #ffffff;
 }
 </style>

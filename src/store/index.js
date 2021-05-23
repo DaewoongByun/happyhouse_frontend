@@ -11,6 +11,9 @@ export default new Vuex.Store({
       token: '',
     },
     loginResult: '',
+    houseinfos: [],
+    housedeals: [],
+    selectedHouseName: '',
   },
   getters: {
     loginUser: (state) => {
@@ -18,6 +21,15 @@ export default new Vuex.Store({
     },
     loginResult: (state) => {
       return state.loginResult;
+    },
+    houseinfos: (state) => {
+      return state.houseinfos;
+    },
+    housedeals: (state) => {
+      return state.housedeals;
+    },
+    selectedHouseName: (state) => {
+      return state.selectedHouseName;
     },
   },
   mutations: {
@@ -36,8 +48,37 @@ export default new Vuex.Store({
       state.loginResult = '';
       localStorage.removeItem('loginUser');
     },
+    SET_HOUSEINFOS(state, data) {
+      state.houseinfos = data.houseinfo;
+      console.log(state.houseinfos);
+    },
+    SET_HOUSE_DEALS(state, data) {
+      state.housedeals = data.deals;
+      state.selectedHouseName = data.name;
+      console.log(`${state.selectedHouseName} 선택`);
+      console.log(state.housedeals);
+    },
   },
   actions: {
+    setHouseDeals({ commit }, data) {
+      commit('SET_HOUSE_DEALS', data);
+    },
+    setHouseinfos({ commit, state }, search) {
+      const url = `http://localhost:8000/search/apt/${search.code}/${search.dong}`;
+      axios({
+        method: 'get',
+        url: url,
+        headers: {
+          'Authorization': state.loginUser.token,
+        },
+      })
+        .then((response) => {
+          commit('SET_HOUSEINFOS', response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
     setLogin({ commit }, loginUser) {
       commit('LOGIN', loginUser);
     },

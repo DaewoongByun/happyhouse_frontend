@@ -1,7 +1,7 @@
 <template>
   <div id="navbar" class="container">
     <div class="navbar__space"></div>
-    <div class="navbar__item">매매 검색</div>
+    <div class="navbar__item" @click="$router.push('/house')">매매 검색</div>
     <div class="navbar__space"></div>
     <div class="navbar__item">자유 게시판</div>
     <div class="navbar__space"></div>

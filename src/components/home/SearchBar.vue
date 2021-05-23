@@ -11,8 +11,8 @@
 
     <div v-if="listShow" class="list-container">
       <div class="list-item flex-box" v-if="list.length === 0">결과가 없습니다.</div>
-      <div class="list-item flex-box" v-for="(item, i) in list" :key="i" @click="search(item)">
-        {{ i }} {{ item }}
+      <div class="list-item flex-box" v-for="(item, i) in list" :key="i" @click="search(item, i)">
+        {{ item }}
       </div>
     </div>
   </div>
@@ -20,7 +20,7 @@
 
 <script>
 import axios from 'axios';
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 export default {
   name: 'SearchBar',
   data() {
@@ -35,9 +35,10 @@ export default {
     ...mapGetters(['loginUser']),
   },
   methods: {
+    ...mapActions(['setHouseinfos']),
     change: function () {
       console.log(this.searchWord);
-      const url = `http://localhost:8000/search/${this.searchWord}`;
+      const url = `http://localhost:8000/search/address/${this.searchWord}`;
       axios({
         method: 'get',
         url: url,
@@ -60,11 +61,15 @@ export default {
     blur: function () {
       setTimeout(() => {
         this.listShow = false;
-      }, 100);
+      }, 200);
     },
-    search: function (item) {
+    search: function (item, i) {
       const dong = item.split(' ')[2];
-      console.log(dong);
+      const code = this.codes[i];
+      console.log(code + ' ' + dong);
+      this.searchWord = item;
+      this.setHouseinfos({ dong, code });
+      this.$router.push('/house');
     },
   },
 };
@@ -74,6 +79,7 @@ export default {
 #search-bar {
   margin-top: 20px;
   flex-direction: column;
+  width: 100%;
 }
 input {
   height: 40px;
