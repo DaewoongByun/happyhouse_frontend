@@ -3,18 +3,22 @@
     <Header />
     <NavBar />
     <router-view />
+    <Footer />
   </div>
 </template>
 <script>
 import Header from './components/home/Header';
 import NavBar from './components/home/NavBar';
 import { mapActions } from 'vuex';
+import Footer from './components/home/Footer';
 export default {
   components: {
     Header,
     NavBar,
+    Footer,
   },
-  created() {
+  
+    created() {
     const loginUser = JSON.parse(localStorage.getItem('loginUser'));
     if (loginUser) {
       this.setLogin(loginUser);

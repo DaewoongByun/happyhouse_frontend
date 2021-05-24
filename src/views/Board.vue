@@ -1,20 +1,20 @@
 <template>
-  <div id="notice" class="container flex-box">
-    <div class="Notice__top flex-box">
-      <div class="Notice__header">
-        <h1>공지사항</h1>
+  <div id="board" class="container flex-box">
+    <div class="Board__top flex-box">
+      <div class="Board__header">
+        <h1>자유게시판</h1>
       </div>
-      <div class="Notice__searchBar">
-        <NoticeSearchBar/>
+      <div class="Board__searchBar">
+        <BoardSearchBar/>
       </div>
     </div>
-    <div class="Notice__mid flex-box">
+    <div class="Board__mid flex-box">
       <router-view />
     </div>
-    <div class="Notice__bottom flex-box">
-      <div class="Notice__Pagenation">
+    <div class="Board__bottom flex-box">
+      <div class="Board__Pagenation">
       </div>
-      <div class="Notice__writeBtn">
+      <div class="Board__writeBtn">
         <button class="btn__write" @click="writeArticle">글쓰기</button>
       </div>
     </div>
@@ -23,68 +23,56 @@
 </template>
 
 <script>
-import NoticeSearchBar from '../components/notice/NoticeSearchBar'
+import BoardSearchBar from '../components/board/BoardSearchBar'
 export default {
   name : 'Notice',
   components :{
-    NoticeSearchBar,
-  },
-  data() {
-    return {
-      
-    }
-  },
-  computed:{
-    
+    BoardSearchBar,
   },
   methods:{
     writeArticle(){
-      this.$router.push('/notice/write');
+      this.$router.push('/board/write');
     }
   },
-  created(){
-    console.log("notice vue created");
-  }
-
 
 };
 </script>
 
 <style scoped>
-#notice{
+#board{
   margin-top: 20px;
   height: auto;
   flex-direction: column;
 }
-.Notice__top{
+.Board__top{
   width: 100%;
   height: 100px;
 }
-.Notice__header{
+.Board__header{
   flex: 5;
   justify-items: center;
 }
 h1{
   display: inline-block;
 }
-.Notice__searchBar{
+.Board__searchBar{
   flex: 3;
   justify-items: flex-end;
 }
-.Notice__mid{
+.Board__mid{
   width: 100%;
   min-height: 600px;
 
 }
-.Notice__bottom{
+.Board__bottom{
   width: 100%;
   height: 50px;
 }
-.Notice__Pagenation{
+.Board__Pagenation{
   flex: 7;
   justify-content: center;
 }
-.Notice__writeBtn{
+.Board__writeBtn{
   flex: 0;
   justify-content: flex-end;
 }
