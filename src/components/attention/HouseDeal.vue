@@ -39,84 +39,84 @@
 </template>
 
 <script>
-import HouseDealItem from './HouseDealItem';
-import { mapGetters } from 'vuex';
-export default {
-  name: 'HouseDeal',
-  data() {
-    return {
-      isTrade: true,
-      isRent: false,
-      visibleDeals: [],
-    };
-  },
-  components: {
-    HouseDealItem,
-  },
-  computed: {
-    ...mapGetters('attentionStore', ['attentionDeals', 'selectedAttentionName']),
-  },
-  watch: {
-    attentionDeals: function () {
+  import HouseDealItem from "./HouseDealItem";
+  import { mapGetters } from "vuex";
+  export default {
+    name: "HouseDeal",
+    data() {
+      return {
+        isTrade: true,
+        isRent: false,
+        visibleDeals: [],
+      };
+    },
+    components: {
+      HouseDealItem,
+    },
+    computed: {
+      ...mapGetters("attentionStore", ["attentionDeals", "selectedAttentionName"]),
+    },
+    watch: {
+      attentionDeals: function () {
+        this.updateVisibleDeals();
+      },
+    },
+    methods: {
+      setTrade() {
+        this.isTrade = true;
+        this.isRent = false;
+        this.updateVisibleDeals();
+      },
+      setRent() {
+        this.isTrade = false;
+        this.isRent = true;
+        this.updateVisibleDeals();
+      },
+      updateVisibleDeals() {
+        if (this.isTrade) {
+          this.visibleDeals = this.attentionDeals.filter((deal) => deal.type.includes("Trade"));
+        } else if (this.isRent) {
+          this.visibleDeals = this.attentionDeals.filter((deal) => deal.type.includes("Rent"));
+        }
+      },
+    },
+    created() {
       this.updateVisibleDeals();
     },
-  },
-  methods: {
-    setTrade() {
-      this.isTrade = true;
-      this.isRent = false;
-      this.updateVisibleDeals();
-    },
-    setRent() {
-      this.isTrade = false;
-      this.isRent = true;
-      this.updateVisibleDeals();
-    },
-    updateVisibleDeals() {
-      if (this.isTrade) {
-        this.visibleDeals = this.attentionDeals.filter((deal) => deal.type.includes('Trade'));
-      } else if (this.isRent) {
-        this.visibleDeals = this.attentionDeals.filter((deal) => deal.type.includes('Rent'));
-      }
-    },
-  },
-  created() {
-    this.updateVisibleDeals();
-  },
-};
+  };
 </script>
 
 <style scoped>
-#house-deal {
-  flex-direction: column;
-  justify-content: flex-start;
-  width: 100%;
-  height: 100%;
-}
-.button-container {
-  justify-content: space-around;
-  width: 100%;
-  height: 40px;
-}
-.name {
-  height: 30px;
-  width: 100%;
-  font-size: 18px;
-  margin-bottom: 10px;
-  font-weight: 600;
-  padding: 10px;
-}
-.deals {
-  flex-direction: column;
-  justify-content: flex-start;
-  width: 100%;
-  overflow-y: auto;
-}
+  #house-deal {
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+  }
+  .button-container {
+    justify-content: space-around;
+    width: 100%;
+    height: 40px;
+  }
+  .name {
+    height: 30px;
+    width: 100%;
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-weight: 600;
+    padding: 10px;
+  }
+  .deals {
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    overflow-y: auto;
+  }
 
-.radio {
-  cursor: pointer;
-}
-.radio__icon {
-  margin-right: 7px;
-}
+  .radio {
+    cursor: pointer;
+  }
+  .radio__icon {
+    margin-right: 7px;
+  }
 </style>

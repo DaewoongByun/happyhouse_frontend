@@ -1,7 +1,7 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-import axios from 'axios';
-import attentionStore from './modules/attentionStore.js';
+import Vue from "vue";
+import Vuex from "vuex";
+import axios from "axios";
+import attentionStore from "./modules/attentionStore.js";
 
 Vue.use(Vuex);
 
@@ -11,18 +11,18 @@ export default new Vuex.Store({
   },
   state: {
     loginUser: {
-      id: '',
-      token: '',
+      id: "",
+      token: "",
     },
-    loginResult: '',
+    loginResult: "",
     houseinfos: [],
     orderedHouseinfos: [],
     housedeals: [],
-    selectedHouseName: '',
+    selectedHouseName: "",
     selectedHouseInfo: {},
     isLoading: false,
-    selectedCity: '',
-    selectedGugun: '',
+    selectedCity: "",
+    selectedGugun: "",
     mapCenter: {
       lat: 36.35513321021629,
       lng: 127.29836175576918,
@@ -75,23 +75,23 @@ export default new Vuex.Store({
     },
     boardlength: (state) => {
       return state.boardlist.length;
-    }
+    },
   },
   mutations: {
     LOGIN(state, data) {
       state.loginUser.id = data.id;
       state.loginUser.token = data.token;
-      state.loginResult = 'success';
-      localStorage.setItem('loginUser', JSON.stringify(state.loginUser));
+      state.loginResult = "success";
+      localStorage.setItem("loginUser", JSON.stringify(state.loginUser));
     },
     LOGIN_FAILED(state) {
-      state.loginResult = 'failed';
+      state.loginResult = "failed";
     },
     LOGOUT(state) {
-      state.loginUser.id = '';
-      state.loginUser.token = '';
-      state.loginResult = '';
-      localStorage.removeItem('loginUser');
+      state.loginUser.id = "";
+      state.loginUser.token = "";
+      state.loginResult = "";
+      localStorage.removeItem("loginUser");
     },
     SET_HOUSEINFOS(state, data) {
       state.houseinfos = data.houseinfo;
@@ -108,7 +108,7 @@ export default new Vuex.Store({
         };
       }
       state.housedeals = [];
-      state.selectedHouseName = '';
+      state.selectedHouseName = "";
       state.selectedHouseInfo = {};
       console.log(state.houseinfos);
     },
@@ -133,8 +133,8 @@ export default new Vuex.Store({
             score1 = score1 + scores1[`${rank[0]}score`] * Math.pow(1000, 2 - i);
             score2 = score2 + scores2[`${rank[0]}score`] * Math.pow(1000, 2 - i);
           }
-          console.log('score1 : ' + score1);
-          console.log('score2 : ' + score2);
+          console.log("score1 : " + score1);
+          console.log("score2 : " + score2);
           return score2 - score1;
         });
       }
@@ -160,11 +160,11 @@ export default new Vuex.Store({
       state.houseinfos = [];
       state.orderedHouseinfos = [];
       state.housedeals = [];
-      state.selectedHouseName = '';
+      state.selectedHouseName = "";
       state.selectedHouseInfo = {};
       state.isLoading = false;
-      state.selectedCity = '';
-      state.selectedGugun = '';
+      state.selectedCity = "";
+      state.selectedGugun = "";
       state.mapCenter = {
         lat: 36.35513321021629,
         lng: 127.29836175576918,
@@ -185,23 +185,23 @@ export default new Vuex.Store({
     },
     SET_BOARD_LIST(state, data) {
       state.boardlist = data.board;
-    }
+    },
   },
   actions: {
     deleteAttention({ commit }, info) {
-      const loginUser = JSON.parse(localStorage.getItem('loginUser'));
+      const loginUser = JSON.parse(localStorage.getItem("loginUser"));
       const url = `http://localhost:8000/member/attention/${info.no}`;
       axios({
-        method: 'delete',
+        method: "delete",
         url: url,
         headers: {
-          'Authorization': loginUser.token,
+          Authorization: loginUser.token,
         },
       })
         .then((response) => {
           console.log(response);
-          if (response.data == 'Success') {
-            commit('DELETE_ATTENTION', info);
+          if (response.data == "Success") {
+            commit("DELETE_ATTENTION", info);
           }
         })
         .catch((error) => {
@@ -209,21 +209,21 @@ export default new Vuex.Store({
         });
     },
     destroy({ commit }) {
-      commit('DESTROY');
+      commit("DESTROY");
     },
     addAttention({ commit }, houseinfo) {
-      const loginUser = JSON.parse(localStorage.getItem('loginUser'));
+      const loginUser = JSON.parse(localStorage.getItem("loginUser"));
       const url = `http://localhost:8000/member/attention/${houseinfo.no}`;
       axios({
-        method: 'post',
+        method: "post",
         url: url,
         headers: {
-          'Authorization': loginUser.token,
+          Authorization: loginUser.token,
         },
       })
         .then((response) => {
-          if (response.data == 'Success') {
-            commit('ADD_ATTENTION', houseinfo);
+          if (response.data == "Success") {
+            commit("ADD_ATTENTION", houseinfo);
           }
         })
         .catch((error) => {
@@ -231,13 +231,13 @@ export default new Vuex.Store({
         });
     },
     setMapCenter({ commit }, center) {
-      commit('SET_MAP_CENTER', center);
+      commit("SET_MAP_CENTER", center);
     },
     orderByRank({ commit }, rank) {
-      commit('ORDER_BY_RANK', rank);
+      commit("ORDER_BY_RANK", rank);
     },
     setHouseDeals({ commit }, data) {
-      commit('SET_HOUSE_DEALS', data);
+      commit("SET_HOUSE_DEALS", data);
     },
     setHouseinfos({ commit, state }, search) {
       state.isLoading = true;
@@ -245,14 +245,14 @@ export default new Vuex.Store({
       state.selectedGugun = search.gugun;
       const url = `http://localhost:8000/search/apt/${search.code}/${search.dong}`;
       axios({
-        method: 'get',
+        method: "get",
         url: url,
         headers: {
-          'Authorization': state.loginUser.token,
+          Authorization: state.loginUser.token,
         },
       })
         .then((response) => {
-          commit('SET_HOUSEINFOS', response.data);
+          commit("SET_HOUSEINFOS", response.data);
           state.isLoading = false;
         })
         .catch((error) => {
@@ -261,14 +261,14 @@ export default new Vuex.Store({
         });
     },
     setLogin({ commit }, loginUser) {
-      commit('LOGIN', loginUser);
+      commit("LOGIN", loginUser);
     },
     login({ commit }, inputData) {
-      console.log('loginAction');
+      console.log("loginAction");
       console.log(inputData);
       axios({
-        method: 'post',
-        url: 'http://localhost:8000/member/login',
+        method: "post",
+        url: "http://localhost:8000/member/login",
         data: {
           id: inputData.id,
           password: inputData.password,
@@ -280,51 +280,51 @@ export default new Vuex.Store({
             id: inputData.id,
             token: response.data,
           };
-          commit('LOGIN', loginUser);
+          commit("LOGIN", loginUser);
         })
         .catch(function (error) {
-          commit('LOGIN_FAILED');
+          commit("LOGIN_FAILED");
           console.dir(error);
         });
     },
     logout({ commit }) {
-      console.log('logoutAction');
-      commit('LOGOUT');
+      console.log("logoutAction");
+      commit("LOGOUT");
     },
-    getNoticeList({ commit, state }, params=null) {
+    getNoticeList({ commit, state }, params = null) {
       //console.log("getNoticeList");
       axios({
-        method: 'get',
-        url: 'http://localhost:8000/notice',
+        method: "get",
+        url: "http://localhost:8000/notice",
         headers: {
-          'Authorization': state.loginUser.token,
+          Authorization: state.loginUser.token,
         },
-        params : params,
+        params: params,
       })
         .then((response) => {
-        console.dir(response);
-        commit('SET_NOTICE_LIST', response.data);
-      })
+          console.dir(response);
+          commit("SET_NOTICE_LIST", response.data);
+        })
         .catch(function (error) {
-        console.dir(error);
-      });
+          console.dir(error);
+        });
     },
     getBoardList({ commit, state }, params = null) {
       axios({
-        method: 'get',
-        url: 'http://localhost:8000/board',
+        method: "get",
+        url: "http://localhost:8000/board",
         headers: {
-          'Authorization': state.loginUser.token,
+          Authorization: state.loginUser.token,
         },
-        params : params,
+        params: params,
       })
         .then((response) => {
-        console.dir(response);
-        commit('SET_BOARD_LIST', response.data);
-      })
+          console.dir(response);
+          commit("SET_BOARD_LIST", response.data);
+        })
         .catch(function (error) {
           console.dir(error);
-      });
-    }
+        });
+    },
   },
 });

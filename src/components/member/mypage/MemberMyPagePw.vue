@@ -19,79 +19,79 @@
 </template>
 
 <script>
-import axios from 'axios';
-import { mapActions, mapGetters } from 'vuex';
-export default {
-  name: 'MyPagePw',
-  data() {
-    return {
-      currentPassword: '',
-      newPassword: '',
-      newPasswordConf: '',
-    };
-  },
-  computed: {
-    ...mapGetters(['loginUser']),
-  },
-  methods: {
-    ...mapActions(['logout']),
-    inputClear: function () {
-      this.currentPassword = '';
-      this.newPassword = '';
-      this.newPasswordConf = '';
+  import axios from "axios";
+  import { mapActions, mapGetters } from "vuex";
+  export default {
+    name: "MyPagePw",
+    data() {
+      return {
+        currentPassword: "",
+        newPassword: "",
+        newPasswordConf: "",
+      };
     },
-    modify: function () {
-      const url = `http://localhost:8000/member/pass/${this.loginUser.id}`;
-      axios({
-        method: 'put',
-        url: url,
-        data: {
-          password: this.currentPassword,
-          newPassword: this.newPassword,
-        },
-        headers: {
-          'Authorization': this.loginUser.token,
-        },
-      })
-        .then((response) => {
-          alert('수정 완료');
-          console.log(response);
-          this.logout();
-          this.$router.push('/');
+    computed: {
+      ...mapGetters(["loginUser"]),
+    },
+    methods: {
+      ...mapActions(["logout"]),
+      inputClear: function () {
+        this.currentPassword = "";
+        this.newPassword = "";
+        this.newPasswordConf = "";
+      },
+      modify: function () {
+        const url = `http://localhost:8000/member/pass/${this.loginUser.id}`;
+        axios({
+          method: "put",
+          url: url,
+          data: {
+            password: this.currentPassword,
+            newPassword: this.newPassword,
+          },
+          headers: {
+            Authorization: this.loginUser.token,
+          },
         })
-        .catch((error) => {
-          console.log(error);
-          alert('비밀번호를 확인하세요');
-          this.inputClear();
-        });
+          .then((response) => {
+            alert("수정 완료");
+            //console.log(response);
+            this.logout();
+            this.$router.push("/");
+          })
+          .catch((error) => {
+            //console.log(error);
+            alert("비밀번호를 확인하세요");
+            this.inputClear();
+          });
+      },
     },
-  },
-};
+  };
 </script>
 
 <style scoped>
-#my-page-pw {
-  flex-direction: column;
-  height: 100%;
-  width: 100%;
-}
-label {
-  flex: 3;
-}
-input {
-  flex: 7;
-  height: 30px;
-}
-.input-container {
-  flex: 1;
-  width: 100%;
-  padding: 0px 20px;
-  box-sizing: border-box;
-}
-.button-container {
-  flex: 1;
-  width: 100%;
-  justify-content: flex-end;
-  padding: 0px 20px;
-}
+  #my-page-pw {
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+  }
+  label {
+    flex: 3;
+  }
+  input {
+    flex: 7;
+    height: 30px;
+  }
+  .input-container {
+    flex: 1;
+    width: 100%;
+    padding: 0px 20px;
+    box-sizing: border-box;
+  }
+  .button-container {
+    flex: 1;
+    width: 100%;
+    justify-content: flex-end;
+    padding: 0px 20px;
+  }
 </style>
