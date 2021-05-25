@@ -1,5 +1,5 @@
 <template>
-  <div id="search-bar" class="container flex-box">
+  <div id="search-bar" class="flex-box">
     <input
       type="text"
       @keyup="change"
@@ -86,6 +86,11 @@
   input {
     height: 40px;
     width: 70%;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+  input:focus {
+    outline: none;
   }
   .list-container {
     width: 70%;
