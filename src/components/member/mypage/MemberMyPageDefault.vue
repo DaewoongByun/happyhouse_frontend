@@ -42,7 +42,7 @@ export default {
   methods: {
     ...mapActions(['logout']),
     modify: function () {
-      const url = `http://localhost:8000/member/${this.loginUser.id}`;
+      const url = `http://localhost:8000/member/mypage/${this.loginUser.id}`;
       axios({
         method: 'put',
         url: url,
@@ -65,7 +65,7 @@ export default {
         });
     },
     deleteMember: function () {
-      const url = `http://localhost:8000/member/${this.loginUser.id}`;
+      const url = `http://localhost:8000/member/mypage/${this.loginUser.id}`;
       axios({
         method: 'delete',
         url: url,
@@ -85,7 +85,7 @@ export default {
     },
   },
   created() {
-    const url = `http://localhost:8000/member/${this.loginUser.id}`;
+    const url = `http://localhost:8000/member/mypage/${this.loginUser.id}`;
     console.log(this.loginUser.id);
     axios({
       method: 'get',

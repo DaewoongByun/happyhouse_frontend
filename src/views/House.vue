@@ -1,29 +1,38 @@
 <template>
   <div id="house" class="container flex-box">
-    <div class="house__top flex-box">
-      <div class="house__top__searchBar flex-box">
-        <search-bar></search-bar>
-      </div>
-      <div class="house__top__selectBar flex-box">
-        <select-bar />
-      </div>
-    </div>
-    <div class="house__mid flex-box">
-      <div class="house__mid__apt flex-box">
-        <div class="house__mid__apt__info flex-box">
-          <house-info />
+    <compare v-if="isCompare" :compareList="compareList" @exitCompare="exitCompare" />
+    <template v-if="!isCompare">
+      <div class="house__top flex-box">
+        <div class="house__top__searchBar flex-box">
+          <search-bar></search-bar>
         </div>
-        <div class="house__mid__apt__deal flex-box">
-          <house-deal />
+        <div class="house__top__selectBar flex-box">
+          <select-bar />
         </div>
       </div>
-      <div class="house__mid__map flex-box">
-        <Map />
+      <div class="house__mid flex-box">
+        <div class="house__mid__apt flex-box">
+          <div class="house__mid__apt__info flex-box">
+            <house-info
+              @compare="compare"
+              @compareReset="compareReset"
+              :compareList="compareList"
+            />
+          </div>
+          <div class="house__mid__apt__deal flex-box">
+            <house-deal />
+          </div>
+        </div>
+        <div class="house__mid__map flex-box">
+          <Map />
+        </div>
       </div>
-    </div>
-    <div class="house__bottom flex-box">
-      <div class="house__bottom__chart flex-box"></div>
-    </div>
+      <div class="house__bottom flex-box">
+        <div class="house__bottom__chart flex-box">
+          <chart />
+        </div>
+      </div>
+    </template>
   </div>
 </template>
 
@@ -32,7 +41,11 @@ import SearchBar from '../components/home/SearchBar.vue';
 import SelectBar from '../components/house/SelectBar.vue';
 import HouseInfo from '../components/house/HouseInfo.vue';
 import HouseDeal from '../components/house/HouseDeal.vue';
+import Compare from '../components/house/Compare.vue';
+
 import Map from '../components/house/Map.vue';
+import Chart from '../components/house/Chart.vue';
+import { mapActions } from 'vuex';
 export default {
   name: 'House',
   components: {
@@ -41,6 +54,30 @@ export default {
     HouseInfo,
     HouseDeal,
     Map,
+    Chart,
+    Compare,
+  },
+  data() {
+    return {
+      isCompare: false,
+      compareList: [],
+    };
+  },
+  methods: {
+    ...mapActions(['destroy']),
+    compare: function (compareList) {
+      this.compareList = compareList;
+      this.isCompare = true;
+    },
+    exitCompare: function () {
+      this.isCompare = false;
+    },
+    compareReset: function () {
+      this.compareList = [];
+    },
+  },
+  destroyed() {
+    this.destroy();
   },
 };
 </script>
@@ -68,6 +105,7 @@ export default {
 .house__mid {
   width: 100%;
   height: 600px;
+  margin-bottom: 20px;
 }
 .house__mid__apt {
   height: 100%;
@@ -89,5 +127,7 @@ export default {
   width: 100%;
 }
 .house__bottom__chart {
+  width: 100%;
+  height: auto;
 }
 </style>

@@ -5,7 +5,7 @@
       <div class="buildyear">건축년도: {{ houseinfo.buildYear }}</div>
     </div>
     <div class="icon-container flex-box">
-      <div class="icon" @click="attentionToggle">
+      <div class="icon" @click="delAttention">
         <b-icon icon="star-fill" aria-hidden="true" v-if="houseinfo.attention"></b-icon>
         <b-icon icon="star" aria-hidden="true" v-if="!houseinfo.attention"></b-icon>
       </div>
@@ -23,24 +23,20 @@ export default {
   name: 'HouseInfoItem',
   props: ['houseinfo', 'idx', 'isCompare'],
   methods: {
-    ...mapActions(['setHouseDeals', 'setMapCenter', 'deleteAttention', 'addAttention']),
+    ...mapActions('attentionStore', ['setAttentionDeals', 'setMapCenter', 'deleteAttention']),
     showDeals: function () {
       const data = this.houseinfo;
-      this.setHouseDeals(data);
+      this.setAttentionDeals(data);
       const center = {
         lat: this.houseinfo.lat,
         lng: this.houseinfo.lng,
       };
-      console.log(center);
       this.setMapCenter(center);
     },
-    attentionToggle: function () {
-      if (this.houseinfo.attention) {
-        if (confirm('관심목록에서 삭제하시겠습니까?')) {
-          this.deleteAttention(this.houseinfo);
-        }
-      } else {
-        this.addAttention(this.houseinfo);
+    delAttention: function () {
+      const answer = confirm('관심목록에서 삭제하시겠습니까');
+      if (answer) {
+        this.deleteAttention(this.houseinfo);
       }
     },
     compareToggle: function () {

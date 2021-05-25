@@ -1,10 +1,14 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
+import attentionStore from './modules/attentionStore.js';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+  modules: {
+    attentionStore: attentionStore,
+  },
   state: {
     loginUser: {
       id: '',
@@ -12,9 +16,17 @@ export default new Vuex.Store({
     },
     loginResult: '',
     houseinfos: [],
+    orderedHouseinfos: [],
     housedeals: [],
     selectedHouseName: '',
+    selectedHouseInfo: {},
     isLoading: false,
+    selectedCity: '',
+    selectedGugun: '',
+    mapCenter: {
+      lat: 36.35513321021629,
+      lng: 127.29836175576918,
+    },
   },
   getters: {
     loginUser: (state) => {
@@ -35,6 +47,21 @@ export default new Vuex.Store({
     isLoading: (state) => {
       return state.isLoading;
     },
+    orderedHouseinfos: (state) => {
+      return state.orderedHouseinfos;
+    },
+    mapCenter: (state) => {
+      return state.mapCenter;
+    },
+    selectedHouseInfo: (state) => {
+      return state.selectedHouseInfo;
+    },
+    selectedCity: (state) => {
+      return state.selectedCity;
+    },
+    selectedGugun: (state) => {
+      return state.selectedGugun;
+    },
   },
   mutations: {
     LOGIN(state, data) {
@@ -54,23 +81,147 @@ export default new Vuex.Store({
     },
     SET_HOUSEINFOS(state, data) {
       state.houseinfos = data.houseinfo;
+      state.orderedHouseinfos = data.houseinfo;
+      if (state.houseinfos.length == 0) {
+        state.mapCenter = {
+          lat: 36.35513321021629,
+          lng: 127.29836175576918,
+        };
+      } else {
+        state.mapCenter = {
+          lat: state.houseinfos[0].lat,
+          lng: state.houseinfos[0].lng,
+        };
+      }
       state.housedeals = [];
       state.selectedHouseName = '';
+      state.selectedHouseInfo = {};
       console.log(state.houseinfos);
     },
     SET_HOUSE_DEALS(state, data) {
-      state.housedeals = data.deals;
-      state.selectedHouseName = data.name;
+      state.housedeals = data.dealInfos;
+      state.selectedHouseName = data.aptName;
+      state.selectedHouseInfo = data;
       console.log(`${state.selectedHouseName} 선택`);
       console.log(state.housedeals);
+      console.log(state.selectedHouseInfo);
+    },
+    ORDER_BY_RANK(state, rank) {
+      if (rank.length === 0) {
+        state.orderedHouseinfos = state.houseinfos;
+      } else {
+        state.orderedHouseinfos.sort(function (info1, info2) {
+          const scores1 = info1.houseScore;
+          const scores2 = info2.houseScore;
+          let score1 = 0;
+          let score2 = 0;
+          for (let i = 0; i < rank.length; i++) {
+            score1 = score1 + scores1[`${rank[0]}score`] * Math.pow(1000, 2 - i);
+            score2 = score2 + scores2[`${rank[0]}score`] * Math.pow(1000, 2 - i);
+          }
+          console.log('score1 : ' + score1);
+          console.log('score2 : ' + score2);
+          return score2 - score1;
+        });
+      }
+    },
+    SET_MAP_CENTER(state, center) {
+      state.mapCenter = center;
+    },
+    ADD_ATTENTION(state, houseinfo) {
+      for (let i = 0; i < state.houseinfos.length; i++) {
+        if (state.houseinfos[i].no == houseinfo.no) {
+          state.houseinfos[i].attention = true;
+          break;
+        }
+      }
+      for (let i = 0; i < state.orderedHouseinfos.length; i++) {
+        if (state.orderedHouseinfos[i].no == houseinfo.no) {
+          state.orderedHouseinfos[i].attention = true;
+          break;
+        }
+      }
+    },
+    DESTROY(state) {
+      state.houseinfos = [];
+      state.orderedHouseinfos = [];
+      state.housedeals = [];
+      state.selectedHouseName = '';
+      state.selectedHouseInfo = {};
+      state.isLoading = false;
+      state.selectedCity = '';
+      state.selectedGugun = '';
+      state.mapCenter = {
+        lat: 36.35513321021629,
+        lng: 127.29836175576918,
+      };
+    },
+    DELETE_ATTENTION(state, info) {
+      for (let i = 0; i < state.houseinfos.length; i++) {
+        if (state.houseinfos[i].no == info.no) {
+          state.houseinfos[i].attention = false;
+          break;
+        }
+      }
+      state.orderedhouseinfos = JSON.parse(JSON.stringify(state.houseinfos));
     },
   },
   actions: {
+    deleteAttention({ commit }, info) {
+      const loginUser = JSON.parse(localStorage.getItem('loginUser'));
+      const url = `http://localhost:8000/member/attention/${info.no}`;
+      axios({
+        method: 'delete',
+        url: url,
+        headers: {
+          'Authorization': loginUser.token,
+        },
+      })
+        .then((response) => {
+          console.log(response);
+          if (response.data == 'Success') {
+            commit('DELETE_ATTENTION', info);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    destroy({ commit }) {
+      commit('DESTROY');
+    },
+    addAttention({ commit }, houseinfo) {
+      const loginUser = JSON.parse(localStorage.getItem('loginUser'));
+      const url = `http://localhost:8000/member/attention/${houseinfo.no}`;
+      axios({
+        method: 'post',
+        url: url,
+        headers: {
+          'Authorization': loginUser.token,
+        },
+      })
+        .then((response) => {
+          if (response.data == 'Success') {
+            commit('ADD_ATTENTION', houseinfo);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    setMapCenter({ commit }, center) {
+      commit('SET_MAP_CENTER', center);
+    },
+    orderByRank({ commit }, rank) {
+      commit('ORDER_BY_RANK', rank);
+    },
     setHouseDeals({ commit }, data) {
       commit('SET_HOUSE_DEALS', data);
     },
     setHouseinfos({ commit, state }, search) {
       state.isLoading = true;
+      state.selectedCity = search.city;
+      state.selectedGugun = search.gugun;
       const url = `http://localhost:8000/search/apt/${search.code}/${search.dong}`;
       axios({
         method: 'get',
@@ -120,5 +271,4 @@ export default new Vuex.Store({
       commit('LOGOUT');
     },
   },
-  modules: {},
 });

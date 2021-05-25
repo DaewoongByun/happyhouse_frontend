@@ -6,6 +6,7 @@ import MemberRegistForm from '../components/member/MemberRegistForm';
 import MemberMyPage from '../components/member/MemberMyPage';
 import House from '../views/House';
 import Notice from '../views/Notice';
+import Attention from '../views/Attention';
 
 Vue.use(VueRouter);
 
@@ -39,6 +40,11 @@ const routes = [
     path: '/notice',
     name: 'Notice',
     component: Notice,
+  },
+  {
+    path: '/attention',
+    name: 'Attention',
+    component: Attention,
   },
 ];
 
