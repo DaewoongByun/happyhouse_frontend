@@ -1,5 +1,9 @@
 <template>
-  <div id="house-info-item" class="flex-box">
+  <div
+    id="house-info-item"
+    class="flex-box"
+    :class="houseinfo.aptName == selectedAttentionName ? 'picked' : ''"
+  >
     <div class="name-container flex-box" @click="showDeals">
       <div class="name">{{ houseinfo.aptName }}</div>
       <div class="buildyear">건축년도: {{ houseinfo.buildYear }}</div>
@@ -23,10 +27,13 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "HouseInfoItem",
   props: ["houseinfo", "idx", "isCompare"],
+  computed: {
+    ...mapGetters("attentionStore", ["selectedAttentionName"]),
+  },
   methods: {
     ...mapActions("attentionStore", ["setAttentionDeals", "setMapCenter", "deleteAttention"]),
     showDeals: function () {
@@ -65,6 +72,12 @@ export default {
   margin-bottom: 10px;
   margin-left: 3px;
   margin-right: 3px;
+}
+#house-info-item:hover {
+  background-color: #ebebeb;
+}
+.picked {
+  background-color: #ebebeb;
 }
 .name-container {
   flex: 7;
