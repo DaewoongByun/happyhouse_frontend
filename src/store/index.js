@@ -27,6 +27,8 @@ export default new Vuex.Store({
       lat: 36.35513321021629,
       lng: 127.29836175576918,
     },
+    noticelist: [],
+    boardlist: [],
   },
   getters: {
     loginUser: (state) => {
@@ -62,6 +64,18 @@ export default new Vuex.Store({
     selectedGugun: (state) => {
       return state.selectedGugun;
     },
+    noticelist: (state) => {
+      return state.noticelist;
+    },
+    noticelength: (state) => {
+      return state.noticelist.length;
+    },
+    boardlist: (state) => {
+      return state.boardlist;
+    },
+    boardlength: (state) => {
+      return state.boardlist.length;
+    }
   },
   mutations: {
     LOGIN(state, data) {
@@ -165,6 +179,13 @@ export default new Vuex.Store({
       }
       state.orderedhouseinfos = JSON.parse(JSON.stringify(state.houseinfos));
     },
+
+    SET_NOTICE_LIST(state, data) {
+      state.noticelist = data.board;
+    },
+    SET_BOARD_LIST(state, data) {
+      state.boardlist = data.board;
+    }
   },
   actions: {
     deleteAttention({ commit }, info) {
@@ -270,5 +291,40 @@ export default new Vuex.Store({
       console.log('logoutAction');
       commit('LOGOUT');
     },
+    getNoticeList({ commit, state }, params=null) {
+      //console.log("getNoticeList");
+      axios({
+        method: 'get',
+        url: 'http://localhost:8000/notice',
+        headers: {
+          'Authorization': state.loginUser.token,
+        },
+        params : params,
+      })
+        .then((response) => {
+        console.dir(response);
+        commit('SET_NOTICE_LIST', response.data);
+      })
+        .catch(function (error) {
+        console.dir(error);
+      });
+    },
+    getBoardList({ commit, state }, params = null) {
+      axios({
+        method: 'get',
+        url: 'http://localhost:8000/board',
+        headers: {
+          'Authorization': state.loginUser.token,
+        },
+        params : params,
+      })
+        .then((response) => {
+        console.dir(response);
+        commit('SET_BOARD_LIST', response.data);
+      })
+        .catch(function (error) {
+          console.dir(error);
+      });
+    }
   },
 });

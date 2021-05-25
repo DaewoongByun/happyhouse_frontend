@@ -17,7 +17,8 @@ export default {
     NavBar,
     Footer,
   },
-  created() {
+  
+    created() {
     const loginUser = JSON.parse(localStorage.getItem('loginUser'));
     if (loginUser) {
       this.setLogin(loginUser);
