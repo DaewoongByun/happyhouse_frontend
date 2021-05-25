@@ -83,4 +83,5 @@
   .board__item:hover {
     background-color: whitesmoke;
   }
+
 </style>

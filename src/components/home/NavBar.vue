@@ -15,35 +15,35 @@
 </template>
 
 <script>
-  export default {
-    name: "NavBar",
-  };
+export default {
+  name: "NavBar",
+};
 </script>
 
 <style scoped>
-  #navbar {
-    height: 60px;
-    display: flex;
-    justify-content: center;
-    box-sizing: border-box;
-  }
-  .navbar__content {
-    width: 100%;
-    height: 100%;
-    box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
-  }
-  .navbar__space {
-    flex: 1;
-  }
-  .navbar__item {
-    flex: 2;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-  }
-  .navbar__item:hover {
-    background-color: #bccab0;
-  }
+#navbar {
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+}
+.navbar__content {
+  width: 100%;
+  height: 100%;
+  box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
+}
+.navbar__space {
+  flex: 1;
+}
+.navbar__item {
+  flex: 2;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.navbar__item:hover {
+  background-color: #bccab0;
+}
 </style>

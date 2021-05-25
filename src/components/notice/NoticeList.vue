@@ -35,6 +35,7 @@
 </template>
 
 <script>
+
   import { mapGetters, mapActions } from "vuex";
   import NoticeItem from "./NoticeListItem";
   export default {
@@ -86,4 +87,5 @@
   .Notice__title {
     width: 600px;
   }
+
 </style>

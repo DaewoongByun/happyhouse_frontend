@@ -38,150 +38,150 @@
 </template>
 
 <script>
-  import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
-  export default {
-    name: "Header",
-    computed: {
-      ...mapGetters(["loginUser", "viewNum"]),
+export default {
+  name: "Header",
+  computed: {
+    ...mapGetters(["loginUser", "viewNum"]),
+  },
+  methods: {
+    ...mapActions(["logout", "setViewNum"]),
+    doLogout: function () {
+      this.logout();
+      this.$router.push({ name: "Home" });
     },
-    methods: {
-      ...mapActions(["logout", "setViewNum"]),
-      doLogout: function () {
-        this.logout();
-        this.$router.push({ name: "Home" });
-      },
-      goHome: function () {
-        this.$router.push("/");
-        this.setViewNum(0);
-      },
-      goSearch: function () {
-        this.$router.push("/house");
-        this.setViewNum(1);
-      },
-      goBoard: function () {
-        this.$router.push("/board");
-        this.setViewNum(2);
-      },
-      goNotice: function () {
-        this.$router.push("/notice");
-        this.setViewNum(3);
-      },
-      goAttention: function () {
-        this.$router.push("/attention");
-        this.setViewNum(4);
-      },
-      goLogin: function () {
-        this.$router.push("/member/login");
-        this.setViewNum(0);
-      },
-      goRegist: function () {
-        this.$router.push("/member/regist");
-        this.setViewNum(0);
-      },
-      goMyPage: function () {
-        this.$router.push("/member/mypage");
-        this.setViewNum(0);
-      },
+    goHome: function () {
+      this.$router.push("/");
+      this.setViewNum(0);
     },
-    watch: {
-      viewNum: function () {
-        console.log("viewNum change");
-        if (this.viewNum == 0) {
-          for (let i = 1; i <= 4; i++) {
-            this.$refs[`line${i}`].classList.push("invisible");
-          }
+    goSearch: function () {
+      this.$router.push("/house");
+      this.setViewNum(1);
+    },
+    goBoard: function () {
+      this.$router.push("/board");
+      this.setViewNum(2);
+    },
+    goNotice: function () {
+      this.$router.push("/notice");
+      this.setViewNum(3);
+    },
+    goAttention: function () {
+      this.$router.push("/attention");
+      this.setViewNum(4);
+    },
+    goLogin: function () {
+      this.$router.push("/member/login");
+      this.setViewNum(0);
+    },
+    goRegist: function () {
+      this.$router.push("/member/regist");
+      this.setViewNum(0);
+    },
+    goMyPage: function () {
+      this.$router.push("/member/mypage");
+      this.setViewNum(0);
+    },
+  },
+  watch: {
+    viewNum: function () {
+      console.log("viewNum change");
+      if (this.viewNum == 0) {
+        for (let i = 1; i <= 4; i++) {
+          this.$refs[`line${i}`].classList.push("invisible");
         }
-      },
+      }
     },
-  };
+  },
+};
 </script>
 
 <style scoped>
-  #header {
-    height: 75px;
-    display: flex;
-    justify-content: center;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.24);
-    position: fixed;
-    top: 0px;
-    background-color: white;
-    z-index: 9999;
-  }
+#header {
+  height: 75px;
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.24);
+  position: fixed;
+  top: 0px;
+  background-color: rgba(255, 255, 255, 0.85);
+  z-index: 9999;
+}
 
-  .header__title {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 24px;
-    font-weight: 600;
-    flex: 1;
-  }
-  .header__title__text {
-    cursor: pointer;
-  }
-  .header__nav {
-    flex: 4;
-    height: 100%;
-    font-weight: 600;
-  }
-  .navbar__item__container {
-    width: auto;
-    height: 100%;
-    flex-direction: column;
-  }
-  .line {
-    height: 3px;
-    background-color: black;
-    margin-top: 5px;
-  }
-  .line1 {
-    width: 80px;
-  }
-  .line2 {
-    width: 90px;
-  }
-  .line3 {
-    width: 70px;
-  }
-  .line4 {
-    width: 90px;
-  }
-  .visible {
-    background-color: black;
-    transition-duration: 0.5s;
-  }
-  .invisible {
-    background-color: white;
-    transition-duration: 0.5s;
-  }
-  .navbar__item {
-    width: 120px;
-    font-size: 18px;
-    cursor: pointer;
-  }
-  .navbar__item:hover {
-    transform: scale(1.15);
-    transition-duration: 0.5s;
-  }
-  .header__member {
-    flex: 1;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 15px;
-  }
-  .header__member__item {
-    cursor: pointer;
-    margin-left: 20px;
-    min-width: 100px;
-  }
-  .header__member__item:hover {
-    color: #758c61;
-  }
-  img {
-    height: 90px;
-  }
+.header__title {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  font-weight: 600;
+  flex: 1;
+}
+.header__title__text {
+  cursor: pointer;
+}
+.header__nav {
+  flex: 4;
+  height: 100%;
+  font-weight: 600;
+}
+.navbar__item__container {
+  width: auto;
+  height: 100%;
+  flex-direction: column;
+}
+.line {
+  height: 3px;
+  background-color: black;
+  margin-top: 5px;
+}
+.line1 {
+  width: 80px;
+}
+.line2 {
+  width: 90px;
+}
+.line3 {
+  width: 70px;
+}
+.line4 {
+  width: 90px;
+}
+.visible {
+  background-color: black;
+  transition-duration: 0.5s;
+}
+.invisible {
+  background-color: white;
+  transition-duration: 0.5s;
+}
+.navbar__item {
+  width: 120px;
+  font-size: 18px;
+  cursor: pointer;
+}
+.navbar__item:hover {
+  transform: scale(1.15);
+  transition-duration: 0.5s;
+}
+.header__member {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+}
+.header__member__item {
+  cursor: pointer;
+  margin-left: 20px;
+  min-width: 100px;
+}
+.header__member__item:hover {
+  color: #758c61;
+}
+img {
+  height: 90px;
+}
 </style>

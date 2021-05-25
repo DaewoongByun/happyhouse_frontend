@@ -23,108 +23,108 @@
 </template>
 
 <script>
-  import axios from "axios";
-  import { mapGetters } from "vuex";
+import axios from "axios";
+import { mapGetters } from "vuex";
 
-  export default {
-    name: "NoticeArticle",
-    data() {
-      return {
-        article: "",
-      };
+export default {
+  name: "NoticeArticle",
+  data() {
+    return {
+      article: "",
+    };
+  },
+  created() {
+    this.getArticle(this.$route.params.no);
+  },
+  computed: {
+    ...mapGetters(["loginUser"]),
+  },
+  methods: {
+    getArticle(no) {
+      axios({
+        method: "get",
+        url: "http://localhost:8000/notice/" + no,
+        headers: {
+          Authorization: this.loginUser.token,
+        },
+      })
+        .then((Response) => {
+          //console.log(Response.data.article);
+          this.article = Response.data.article;
+        })
+        .catch((error) => {
+          console.dir(error);
+        });
     },
-    created() {
-      this.getArticle(this.$route.params.no);
+    checkMyArticle() {
+      if (this.article.user === this.loginUser.id) {
+        return true;
+      } else {
+        return false;
+      }
     },
-    computed: {
-      ...mapGetters(["loginUser"]),
+    modifyArticle() {
+      this.$router.push(`/notice/${this.article.no}/modify`);
     },
-    methods: {
-      getArticle(no) {
+    deleteArticle() {
+      console.log(this.article);
+      const x = confirm("정말 삭제하시겠습니까?");
+      console.log(x);
+      if (x) {
         axios({
-          method: "get",
-          url: "http://localhost:8000/notice/" + no,
+          method: "DELETE",
+          url: "http://localhost:8000/notice/" + this.article.no,
           headers: {
             Authorization: this.loginUser.token,
           },
         })
-          .then((Response) => {
-            //console.log(Response.data.article);
-            this.article = Response.data.article;
+          .then((response) => {
+            console.log(response);
+            this.$router.push("/notice");
           })
           .catch((error) => {
             console.dir(error);
           });
-      },
-      checkMyArticle() {
-        if (this.article.user === this.loginUser.id) {
-          return true;
-        } else {
-          return false;
-        }
-      },
-      modifyArticle() {
-        this.$router.push(`/notice/${this.article.no}/modify`);
-      },
-      deleteArticle() {
-        console.log(this.article);
-        const x = confirm("정말 삭제하시겠습니까?");
-        console.log(x);
-        if (x) {
-          axios({
-            method: "DELETE",
-            url: "http://localhost:8000/notice/" + this.article.no,
-            headers: {
-              Authorization: this.loginUser.token,
-            },
-          })
-            .then((response) => {
-              console.log(response);
-              this.$router.push("/notice");
-            })
-            .catch((error) => {
-              console.dir(error);
-            });
-        }
-      },
+      }
     },
-  };
+  },
+};
 </script>
 
 <style scoped>
-  #Notice_Article {
-    height: 600px;
-  }
-  .article__head {
-    padding: 10px;
-    border-bottom: 1px solid #e3e3eb;
-  }
-  .article__head__top {
-    justify-content: space-between;
-  }
-  .article__title {
-    font-size: 28px;
-  }
-  .article__time {
-    font-size: 12px;
-    color: gray;
-    display: flex;
-    align-items: flex-end;
-  }
-  .article__user {
-    font-size: 16px;
-    color: gray;
-  }
-  .article__content {
-    display: flex;
-    padding: 20px;
-    border-bottom: 1px solid #e3e7eb;
-    min-height: 200px;
-  }
-  .footer {
-    justify-content: flex-end;
-  }
-  .btn {
-    margin: 2px;
-  }
+#Notice_Article {
+  height: 600px;
+}
+.article__head {
+  padding: 10px;
+  border-bottom: 1px solid #e3e3eb;
+}
+.article__head__top {
+  justify-content: space-between;
+}
+.article__title {
+  font-size: 28px;
+}
+.article__time {
+  font-size: 12px;
+  color: gray;
+  display: flex;
+  align-items: flex-end;
+}
+.article__user {
+  font-size: 16px;
+  color: gray;
+}
+.article__content {
+  display: flex;
+  padding: 20px;
+  border-bottom: 1px solid #e3e7eb;
+  min-height: 200px;
+}
+.footer {
+  justify-content: flex-end;
+}
+.btn {
+  margin: 2px;
+}
 </style>

@@ -12,39 +12,43 @@
 </template>
 
 <script>
-  import MyPageDefault from "./mypage/MemberMyPageDefault";
-  import MyPagePw from "./mypage/MemberMyPagePw";
-  export default {
-    name: "MemberMyPage",
-    data() {
-      return {
-        index: 1,
-      };
-    },
-    components: {
-      MyPageDefault,
-      MyPagePw,
-    },
-  };
+import MyPageDefault from "./mypage/MemberMyPageDefault";
+import MyPagePw from "./mypage/MemberMyPagePw";
+export default {
+  name: "MemberMyPage",
+  data() {
+    return {
+      index: 1,
+    };
+  },
+  components: {
+    MyPageDefault,
+    MyPagePw,
+  },
+};
 </script>
 
 <style scoped>
-  #my-page {
-    margin-top: 30px;
-    height: 600px;
-  }
-  .my-page__nav {
-    flex-direction: column;
-    height: 100%;
-    flex: 1;
-    justify-content: flex-start;
-  }
-  .my-page__nav__item {
-    height: 50px;
-    width: 100%;
-  }
-  .my-page__content {
-    height: 100%;
-    flex: 3;
-  }
+#my-page {
+  margin-top: 30px;
+  height: 600px;
+}
+.my-page__nav {
+  flex-direction: column;
+  height: 100%;
+  flex: 1;
+  justify-content: flex-start;
+}
+.my-page__nav__item {
+  height: 50px;
+  width: 90%;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.24);
+  font-size: 20px;
+  font-weight: 600;
+}
+.my-page__content {
+  height: 100%;
+  flex: 3;
+}
 </style>

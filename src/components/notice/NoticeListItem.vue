@@ -8,6 +8,7 @@
 </template>
 
 <script>
+
   export default {
     name: "NoticeListItem",
     props: ["item"],
@@ -47,6 +48,7 @@
       },
     },
   };
+
 </script>
 
 <style></style>

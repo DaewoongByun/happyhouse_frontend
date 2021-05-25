@@ -27,83 +27,83 @@
 </template>
 
 <script>
-  import axios from "axios";
-  export default {
-    name: "MemberRegistForm",
-    data() {
-      return {
-        id: "",
-        password: "",
-        passwordConfirm: "",
-        name: "",
-        email: "",
-        tel: "",
-      };
+import axios from "axios";
+export default {
+  name: "MemberRegistForm",
+  data() {
+    return {
+      id: "",
+      password: "",
+      passwordConfirm: "",
+      name: "",
+      email: "",
+      tel: "",
+    };
+  },
+  methods: {
+    emptyCheck: function () {
+      if (
+        !this.id ||
+        !this.password ||
+        !this.passwordConfirm ||
+        !this.name ||
+        !this.email ||
+        !this.tel
+      )
+        return false;
+      return true;
     },
-    methods: {
-      emptyCheck: function () {
-        if (
-          !this.id ||
-          !this.password ||
-          !this.passwordConfirm ||
-          !this.name ||
-          !this.email ||
-          !this.tel
-        )
-          return false;
-        return true;
-      },
-      regist: function () {
-        if (!this.emptyCheck()) {
-          alert("모든 항목을 입력하세요");
-          return;
-        }
-        axios({
-          method: "post",
-          url: "http://localhost:8000/member/regist",
-          data: {
-            id: this.id,
-            password: this.password,
-            name: this.name,
-            email: this.email,
-            tel: this.tel,
-          },
+    regist: function () {
+      if (!this.emptyCheck()) {
+        alert("모든 항목을 입력하세요");
+        return;
+      }
+      axios({
+        method: "post",
+        url: "http://localhost:8000/member/regist",
+        data: {
+          id: this.id,
+          password: this.password,
+          name: this.name,
+          email: this.email,
+          tel: this.tel,
+        },
+      })
+        .then((response) => {
+          alert("회원가입 성공");
+          console.log(this.$router.push("/"));
+          console.dir(response);
         })
-          .then((response) => {
-            alert("회원가입 성공");
-            console.log(this.$router.push("/"));
-            console.dir(response);
-          })
-          .catch((error) => {
-            alert("가입실패");
-            console.dir(error);
-          });
-      },
+        .catch((error) => {
+          alert("가입실패");
+          console.dir(error);
+        });
     },
-  };
+  },
+};
 </script>
 
 <style scoped>
-  #regist-form {
-    height: 600px;
-    margin-top: 20px;
-  }
-  .regist-box {
-    flex-direction: column;
-    width: 400px;
-    height: 600px;
-    justify-content: space-between;
-  }
-  .input-container {
-    flex: 1;
-    width: 100%;
-  }
-  .button-container {
-    flex: 1;
-    width: 100%;
-  }
-  input {
-    width: 90%;
-    height: 30px;
-  }
+#regist-form {
+  height: 600px;
+  margin-top: 20px;
+}
+.regist-box {
+  flex-direction: column;
+  width: 400px;
+  height: 600px;
+  justify-content: space-between;
+}
+.input-container {
+  flex: 1;
+  width: 100%;
+}
+.button-container {
+  flex: 1;
+  width: 100%;
+}
+input {
+  width: 90%;
+  height: 30px;
+}
 </style>
