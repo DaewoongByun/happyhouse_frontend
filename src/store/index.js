@@ -29,6 +29,7 @@ export default new Vuex.Store({
     },
     noticelist: [],
     boardlist: [],
+    viewNum: 0,
   },
   getters: {
     loginUser: (state) => {
@@ -76,8 +77,12 @@ export default new Vuex.Store({
     boardlength: (state) => {
       return state.boardlist.length;
     },
+    viewNum: (state) => state.viewNum,
   },
   mutations: {
+    SET_VIEW_NUM(state, num) {
+      state.viewNum = num;
+    },
     LOGIN(state, data) {
       state.loginUser.id = data.id;
       state.loginUser.token = data.token;
@@ -188,6 +193,9 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    setViewNum({ commit }, num) {
+      commit("SET_VIEW_NUM", num);
+    },
     deleteAttention({ commit }, info) {
       const loginUser = JSON.parse(localStorage.getItem("loginUser"));
       const url = `http://localhost:8000/member/attention/${info.no}`;

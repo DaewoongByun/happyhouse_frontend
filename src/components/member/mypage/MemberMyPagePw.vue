@@ -2,15 +2,21 @@
   <div id="my-page-pw" class="flex-box">
     <div class="input-container flex-box">
       <label for="">현재 비밀번호</label>
-      <input type="text" placeholder="현재 비밀번호" v-model="currentPassword" />
+      <input type="password" placeholder="현재 비밀번호" v-model="currentPassword" />
     </div>
     <div class="input-container flex-box">
       <label for="">새로운 비밀번호</label>
-      <input type="text" placeholder="새로운 비밀번호" v-model="newPassword" />
+      <input type="password" placeholder="새로운 비밀번호" v-model="newPassword" />
     </div>
     <div class="input-container flex-box">
       <label for="">새로운 비밀번호 확인</label>
-      <input type="text" placeholder="새로운 비밀번호" v-model="newPasswordConf" />
+      <input
+        type="password"
+        placeholder="새로운 비밀번호 확인"
+        v-model="newPasswordConf"
+        @keyup="check"
+      />
+      <div v-if="messageShow">불일치</div>
     </div>
     <div class="button-container flex-box">
       <button class="button" @click="modify">수정</button>

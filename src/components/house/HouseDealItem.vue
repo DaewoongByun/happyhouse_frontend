@@ -19,7 +19,7 @@
     </div>
     <div class="area-container flex-box">
       <div class="key">평수 :</div>
-      <div class="value">{{ housedeal.area }}</div>
+      <div class="value">{{ housedeal.area }}㎡</div>
     </div>
     <div class="floor-container flex-box">
       <div class="key">층수 :</div>
