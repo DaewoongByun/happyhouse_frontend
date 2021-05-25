@@ -83,7 +83,7 @@ export default {
 
 <style scoped>
 #home {
-  min-height: 1000px;
+  min-height: 800px;
   width: 100%;
   flex-direction: column;
   justify-content: flex-start;
@@ -91,6 +91,7 @@ export default {
 .home__searchbar {
   height: 50px;
   width: 100%;
+  margin-top: 20px;
 }
 
 .img {
@@ -175,41 +176,5 @@ export default {
 .home__list {
   margin: 20px;
   flex: 5;
-}
-.slide-in-elliptic-top-fwd {
-  -webkit-animation: slide-in-elliptic-top-fwd 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  animation: slide-in-elliptic-top-fwd 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-}
-@-webkit-keyframes slide-in-elliptic-top-fwd {
-  0% {
-    -webkit-transform: translateY(-600px) rotateX(-30deg) scale(0);
-    transform: translateY(-600px) rotateX(-30deg) scale(0);
-    -webkit-transform-origin: 50% 100%;
-    transform-origin: 50% 100%;
-    opacity: 0;
-  }
-  100% {
-    -webkit-transform: translateY(0) rotateX(0) scale(1);
-    transform: translateY(0) rotateX(0) scale(1);
-    -webkit-transform-origin: 50% 1400px;
-    transform-origin: 50% 1400px;
-    opacity: 1;
-  }
-}
-@keyframes slide-in-elliptic-top-fwd {
-  0% {
-    -webkit-transform: translateY(-600px) rotateX(-30deg) scale(0);
-    transform: translateY(-600px) rotateX(-30deg) scale(0);
-    -webkit-transform-origin: 50% 100%;
-    transform-origin: 50% 100%;
-    opacity: 0;
-  }
-  100% {
-    -webkit-transform: translateY(0) rotateX(0) scale(1);
-    transform: translateY(0) rotateX(0) scale(1);
-    -webkit-transform-origin: 50% 1400px;
-    transform-origin: 50% 1400px;
-    opacity: 1;
-  }
 }
 </style>
