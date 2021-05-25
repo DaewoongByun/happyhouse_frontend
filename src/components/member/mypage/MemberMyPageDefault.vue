@@ -24,27 +24,27 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
-import axios from 'axios';
+import { mapGetters, mapActions } from "vuex";
+import axios from "axios";
 export default {
-  name: 'MyPageDefaeult',
+  name: "MyPageDefaeult",
   data() {
     return {
-      id: '',
-      tel: '',
-      name: '',
-      email: '',
+      id: "",
+      tel: "",
+      name: "",
+      email: "",
     };
   },
   computed: {
-    ...mapGetters(['loginUser']),
+    ...mapGetters(["loginUser"]),
   },
   methods: {
-    ...mapActions(['logout']),
+    ...mapActions(["logout"]),
     modify: function () {
       const url = `http://localhost:8000/member/mypage/${this.loginUser.id}`;
       axios({
-        method: 'put',
+        method: "put",
         url: url,
         data: {
           email: this.email,
@@ -52,13 +52,13 @@ export default {
           name: this.name,
         },
         headers: {
-          'Authorization': this.loginUser.token,
+          "Authorization": this.loginUser.token,
         },
       })
         .then((response) => {
-          alert('수정 완료');
+          alert("수정 완료");
           console.log(response);
-          this.$router.push('/');
+          this.$router.push("/");
         })
         .catch((error) => {
           console.log(error);
@@ -67,17 +67,17 @@ export default {
     deleteMember: function () {
       const url = `http://localhost:8000/member/mypage/${this.loginUser.id}`;
       axios({
-        method: 'delete',
+        method: "delete",
         url: url,
         headers: {
-          'Authorization': this.loginUser.token,
+          "Authorization": this.loginUser.token,
         },
       })
         .then((response) => {
-          alert('삭제 완료');
+          alert("삭제 완료");
           console.log(response);
           this.logout();
-          this.$router.push('/');
+          this.$router.push("/");
         })
         .catch((error) => {
           console.log(error);
@@ -88,10 +88,10 @@ export default {
     const url = `http://localhost:8000/member/mypage/${this.loginUser.id}`;
     console.log(this.loginUser.id);
     axios({
-      method: 'get',
+      method: "get",
       url: url,
       headers: {
-        'Authorization': this.loginUser.token,
+        "Authorization": this.loginUser.token,
       },
     })
       .then((response) => {

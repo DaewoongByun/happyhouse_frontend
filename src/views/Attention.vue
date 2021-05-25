@@ -35,16 +35,16 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
-import SelectBar from '../components/attention/SelectBar';
-import HouseInfo from '../components/attention/HouseInfo';
-import HouseDeal from '../components/attention/HouseDeal';
-import Map from '../components/attention/Map';
-import Chart from '../components/attention/Chart';
-import Compare from '../components/attention/Compare';
+import { mapGetters, mapActions } from "vuex";
+import SelectBar from "../components/attention/SelectBar";
+import HouseInfo from "../components/attention/HouseInfo";
+import HouseDeal from "../components/attention/HouseDeal";
+import Map from "../components/attention/Map";
+import Chart from "../components/attention/Chart";
+import Compare from "../components/attention/Compare";
 
 export default {
-  name: 'Attention',
+  name: "Attention",
   data() {
     return {
       isCompare: false,
@@ -52,7 +52,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions('attentionStore', ['destroy']),
+    ...mapActions("attentionStore", ["destroy"]),
     compare: function (compareList) {
       this.compareList = compareList;
       this.isCompare = true;
@@ -66,8 +66,8 @@ export default {
   },
   components: {
     SelectBar,
-    'AttentionInfo': HouseInfo,
-    'AttentionDeal': HouseDeal,
+    "AttentionInfo": HouseInfo,
+    "AttentionDeal": HouseDeal,
     Map,
     Chart,
     Compare,

@@ -3,32 +3,32 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters, mapActions } from "vuex";
 export default {
-  name: 'Map',
+  name: "Map",
   mounted() {
     if (window.kakao && window.kakao.maps) {
       this.initMap();
     } else {
-      const script = document.createElement('script');
+      const script = document.createElement("script");
       script.onload = () => kakao.maps.load(this.initMap);
-      const my_api_key = '351d34cf7df2286c1ca151087dbb867c';
+      const my_api_key = "351d34cf7df2286c1ca151087dbb867c";
       script.src = `http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=${my_api_key}`;
       document.head.appendChild(script);
     }
   },
   methods: {
-    ...mapActions(['setHouseDeals']),
+    ...mapActions(["setHouseDeals"]),
     initMap() {
       if (this.attentionList.length === 0) {
-        const container = document.querySelector('#map');
+        const container = document.querySelector("#map");
         const options = {
           center: new kakao.maps.LatLng(this.mapCenter.lat, this.mapCenter.lng),
           level: 3,
         };
         const map = new kakao.maps.Map(container, options);
       } else {
-        const container = document.querySelector('#map');
+        const container = document.querySelector("#map");
         const options = {
           center: new kakao.maps.LatLng(this.mapCenter.lat, this.mapCenter.lng),
           level: 5,
@@ -48,7 +48,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters('attentionStore', ['attentionList', 'mapCenter']),
+    ...mapGetters("attentionStore", ["attentionList", "mapCenter"]),
   },
   watch: {
     mapCenter: function () {
@@ -56,7 +56,7 @@ export default {
         this.initMap();
         return;
       }
-      const container = document.querySelector('#map');
+      const container = document.querySelector("#map");
       const options = {
         center: new kakao.maps.LatLng(this.mapCenter.lat, this.mapCenter.lng),
         level: 3,
@@ -78,7 +78,7 @@ export default {
         this.initMap();
         return;
       }
-      const container = document.querySelector('#map');
+      const container = document.querySelector("#map");
       const options = {
         center: new kakao.maps.LatLng(this.mapCenter.lat, this.mapCenter.lng),
         level: 6,

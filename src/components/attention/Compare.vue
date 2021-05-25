@@ -36,13 +36,13 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 export default {
-  name: 'Compare',
-  props: ['compareList'],
+  name: "Compare",
+  props: ["compareList"],
   methods: {
     exitCompare: function () {
-      this.$emit('exitCompare');
+      this.$emit("exitCompare");
     },
   },
   data() {
@@ -51,14 +51,14 @@ export default {
     };
   },
   created() {
-    const loginUser = JSON.parse(localStorage.getItem('loginUser'));
+    const loginUser = JSON.parse(localStorage.getItem("loginUser"));
     const url = `http://localhost:8000/search/compare`;
     const codes = this.compareList.toString();
     axios({
-      method: 'get',
+      method: "get",
       url: url,
       headers: {
-        'Authorization': loginUser.token,
+        "Authorization": loginUser.token,
       },
       params: {
         codes: codes,

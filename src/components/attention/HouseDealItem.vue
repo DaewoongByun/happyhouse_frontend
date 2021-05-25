@@ -30,8 +30,8 @@
 
 <script>
 export default {
-  name: 'HouseDealItem',
-  props: ['housedeal', 'dealType'],
+  name: "HouseDealItem",
+  props: ["housedeal", "dealType"],
 };
 </script>
 

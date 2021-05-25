@@ -24,18 +24,18 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
-import HouseInfoItem from './HouseInfoItem';
+import { mapGetters, mapActions } from "vuex";
+import HouseInfoItem from "./HouseInfoItem";
 export default {
-  name: 'HouseInfo',
+  name: "HouseInfo",
   components: {
     HouseInfoItem,
   },
   computed: {
-    ...mapGetters('attentionStore', ['orderedAttentionList', 'isLoading']),
+    ...mapGetters("attentionStore", ["orderedAttentionList", "isLoading"]),
   },
   methods: {
-    ...mapActions('attentionStore', ['getAttentionList']),
+    ...mapActions("attentionStore", ["getAttentionList"]),
     addCompare: function (no) {
       this.compareList.push(no);
     },
@@ -49,16 +49,16 @@ export default {
     },
     compare: function () {
       if (this.compareList.length > 0) {
-        this.$emit('compare', this.compareList);
+        this.$emit("compare", this.compareList);
       }
     },
   },
   watch: {
     isLoading: function () {
-      this.$emit('compareReset');
+      this.$emit("compareReset");
     },
   },
-  props: ['compareList'],
+  props: ["compareList"],
   created() {
     this.getAttentionList();
   },

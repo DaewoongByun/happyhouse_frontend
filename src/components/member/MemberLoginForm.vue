@@ -5,38 +5,38 @@
         <input type="text" placeholder="아이디" v-model="id" />
       </div>
       <div class="input-container flex-box">
-        <input type="text" placeholder="패스워드" v-model="password" />
+        <input type="password" placeholder="패스워드" v-model="password" />
       </div>
       <div class="button-container flex-box">
         <button class="button" @click="doLogin">로그인</button>
       </div>
-      <template v-if="loginResult === 'success'">{{ $router.push('/') }}</template>
+      <template v-if="loginResult === 'success'">{{ $router.push("/") }}</template>
       <template v-if="loginResult === 'failed'">로그인 실패</template>
     </div>
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters } from "vuex";
 export default {
-  name: 'MemberLoginForm',
+  name: "MemberLoginForm",
   data() {
     return {
-      id: '',
-      password: '',
+      id: "",
+      password: "",
     };
   },
   computed: {
-    ...mapGetters(['loginResult']),
+    ...mapGetters(["loginResult"]),
   },
   methods: {
-    ...mapActions(['login']),
+    ...mapActions(["login"]),
     doLogin: function () {
       if (!this.id || !this.password) {
-        alert('아이디와 패스워드를 입력하세요');
+        alert("아이디와 패스워드를 입력하세요");
         return;
       }
-      console.log('login');
+      console.log("login");
       this.login({ id: this.id, password: this.password });
       console.log(this.loginResult);
     },
