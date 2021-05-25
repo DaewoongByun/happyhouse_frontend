@@ -21,62 +21,62 @@
 </template>
 
 <script>
-import axios from "axios";
-import { mapGetters, mapActions } from "vuex";
-export default {
-  name: "SearchBar",
-  data() {
-    return {
-      searchWord: "",
-      list: [],
-      codes: [],
-      listShow: false,
-    };
-  },
-  computed: {
-    ...mapGetters(["loginUser"]),
-  },
-  methods: {
-    ...mapActions(["setHouseinfos"]),
-    change: function () {
-      console.log(this.searchWord);
-      const url = `http://localhost:8000/search/address/${this.searchWord}`;
-      axios({
-        method: "get",
-        url: url,
-        headers: {
-          Authorization: this.loginUser.token,
-        },
-      })
-        .then((response) => {
-          this.list = response.data.addresses;
-          this.codes = response.data.codes;
+  import axios from "axios";
+  import { mapGetters, mapActions } from "vuex";
+  export default {
+    name: "SearchBar",
+    data() {
+      return {
+        searchWord: "",
+        list: [],
+        codes: [],
+        listShow: false,
+      };
+    },
+    computed: {
+      ...mapGetters(["loginUser"]),
+    },
+    methods: {
+      ...mapActions(["setHouseinfos"]),
+      change: function () {
+        console.log(this.searchWord);
+        const url = `http://localhost:8000/search/address/${this.searchWord}`;
+        axios({
+          method: "get",
+          url: url,
+          headers: {
+            Authorization: this.loginUser.token,
+          },
         })
-        .catch((error) => {
-          console.log(error);
-          this.list = [];
-        });
+          .then((response) => {
+            this.list = response.data.addresses;
+            this.codes = response.data.codes;
+          })
+          .catch((error) => {
+            console.log(error);
+            this.list = [];
+          });
+      },
+      focus: function () {
+        this.listShow = true;
+      },
+      blur: function () {
+        setTimeout(() => {
+          this.listShow = false;
+        }, 200);
+      },
+      search: function (item, i) {
+        const city = item.split(" ")[0];
+        const gugun = item.split(" ")[1];
+        const dong = item.split(" ")[2];
+        const code = this.codes[i];
+        console.log(code + " " + dong);
+        this.searchWord = item;
+        this.setHouseinfos({ dong, code, city, gugun });
+        this.$router.push("/house");
+      },
     },
-    focus: function () {
-      this.listShow = true;
-    },
-    blur: function () {
-      setTimeout(() => {
-        this.listShow = false;
-      }, 200);
-    },
-    search: function (item, i) {
-      const city = item.split(" ")[0];
-      const gugun = item.split(" ")[1];
-      const dong = item.split(" ")[2];
-      const code = this.codes[i];
-      console.log(code + " " + dong);
-      this.searchWord = item;
-      this.setHouseinfos({ dong, code, city, gugun });
-      this.$router.push("/house");
-    },
-  },
-};
+  };
 </script>
 
 <style scoped>

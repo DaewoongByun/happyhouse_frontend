@@ -44,44 +44,45 @@
 </template>
 
 <script>
-import SearchBar from "../components/home/SearchBar";
-import NoticeList from "../components/notice/NoticeList";
-import BoardList from "../components/board/BoardList";
-export default {
-  name: "Home",
-  components: {
-    SearchBar,
-    NoticeList,
-    BoardList,
-  },
-  data() {
-    return {
-      y: 0,
-    };
-  },
-  methods: {
-    handleScroll() {
-      this.y = window.scrollY;
-      if (this.y > 0) {
-        this.$refs.homeText.classList.add("disappear");
-        this.$refs.homeText.classList.add("invisible");
-      } else {
-        this.$refs.homeText.classList.remove("invisible");
-        this.$refs.homeText.classList.remove("disappear");
-        this.$refs.homeText.classList.add("appear");
-      }
+  import SearchBar from "../components/home/SearchBar";
+  import NoticeList from "../components/notice/NoticeList";
+  import BoardList from "../components/board/BoardList";
+  export default {
+    name: "Home",
+    components: {
+      SearchBar,
+      NoticeList,
+      BoardList,
     },
-  },
-  mounted() {
-    window.addEventListener("scroll", this.handleScroll);
-  },
-  destroyed() {
-    window.removeEventListener("scroll", this.handleScroll);
-  },
-};
+    data() {
+      return {
+        y: 0,
+      };
+    },
+    methods: {
+      handleScroll() {
+        this.y = window.scrollY;
+        if (this.y > 0) {
+          this.$refs.homeText.classList.add("disappear");
+          this.$refs.homeText.classList.add("invisible");
+        } else {
+          this.$refs.homeText.classList.remove("invisible");
+          this.$refs.homeText.classList.remove("disappear");
+          this.$refs.homeText.classList.add("appear");
+        }
+      },
+    },
+    mounted() {
+      window.addEventListener("scroll", this.handleScroll);
+    },
+    destroyed() {
+      window.removeEventListener("scroll", this.handleScroll);
+    },
+  };
 </script>
 
 <style scoped>
+
 #home {
   min-height: 800px;
   width: 100%;
@@ -94,67 +95,68 @@ export default {
   margin-top: 20px;
 }
 
-.img {
-  width: 100%;
-  height: 1000px;
-  background-image: url("../assets/house/wallpaper6.jpg");
-  transition-duration: 1s;
-  position: fixed;
-  top: 0;
-}
-.small-img {
-  width: 1200px;
-  height: 360px;
-  background-image: url("../assets/house/wallpaper6.jpg");
-  transition-duration: 1s;
-}
-.arrow {
-  position: fixed;
-  bottom: 50px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-.invisible2 {
-  display: none;
-}
-.invisible {
-  display: none;
-  transition-delay: 0.8s;
-}
-.home-text__title {
-  font-size: 50px;
-}
-.home-text__sub {
-  font-size: 30px;
-}
-.home-text {
-  position: fixed;
-  left: 100px;
-  top: 20%;
-  color: black;
-  font-weight: 600;
-  display: flex;
-  flex-direction: column;
-}
-.appear {
-  animation: fade-in 0.8s;
-  animation-fill-mode: forwards;
-  display: flex;
-}
+  .img {
+    width: 100%;
+    height: 1000px;
+    background-image: url("../assets/house/wallpaper6.jpg");
+    transition-duration: 1s;
+    position: fixed;
+    top: 0;
+  }
+  .small-img {
+    width: 1200px;
+    height: 360px;
+    background-image: url("../assets/house/wallpaper6.jpg");
+    transition-duration: 1s;
+  }
+  .arrow {
+    position: fixed;
+    bottom: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .invisible2 {
+    display: none;
+  }
+  .invisible {
+    display: none;
+    transition-delay: 0.8s;
+  }
+  .home-text__title {
+    font-size: 50px;
+    text-shadow: 2px 1px 0px white;
+  }
+  .home-text__sub {
+    font-size: 30px;
+  }
+  .home-text {
+    position: fixed;
+    left: 100px;
+    top: 20%;
+    color: black;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+  }
+  .appear {
+    animation: fade-in 0.8s;
+    animation-fill-mode: forwards;
+    display: flex;
+  }
 
-.disappear {
-  animation: fade-out 0.8s;
-  animation-fill-mode: forwards;
-}
-@keyframes fade-in {
-  from {
-    opacity: 0;
+  .disappear {
+    animation: fade-out 0.8s;
+    animation-fill-mode: forwards;
   }
-  to {
-    opacity: 1;
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
-}
 
 @keyframes fade-out {
   from {
