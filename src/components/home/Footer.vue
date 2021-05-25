@@ -32,61 +32,61 @@
 </template>
 
 <script>
-  export default {};
+export default {};
 </script>
 
 <style scoped>
-  #footer {
-    /* background-color: #332221; */
-    height: 150px;
-    border-top: 1px solid #8c99a8;
-  }
-  li,
-  ul {
-    list-style: none;
-  }
-  .part__list li {
-    display: inline-block;
-    position: relative;
-    text-decoration: none;
-    color: black;
-  }
-  .part__list li ::before {
-    position: relative;
-    left: 1px;
-    content: " | ";
-  }
-  .part__list li a {
-    color: black;
-    text-decoration: none;
-  }
-  .footer__img {
-    flex: 1;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  #ssafy_logo {
-    width: 70%;
-    height: inherit;
-  }
-  .footer__body {
-    flex: 9;
-    height: 100%;
-  }
-  .footer__url {
-    height: 2rem;
-    display: flex;
-    padding: 10px;
-  }
-  .footer__text {
-    height: 40%;
-    color: #8c99a8;
-    margin-top: 15px;
-    font-size: 12px;
-  }
-  .footer__copyright {
-    color: #8c99a8;
-  }
+#footer {
+  /* background-color: #332221; */
+  height: 150px;
+  border-top: 1px solid #8c99a8;
+}
+li,
+ul {
+  list-style: none;
+}
+.part__list li {
+  display: inline-block;
+  position: relative;
+  text-decoration: none;
+  color: black;
+}
+.part__list li ::before {
+  position: relative;
+  left: 1px;
+  content: " | ";
+}
+.part__list li a {
+  color: black;
+  text-decoration: none;
+}
+.footer__img {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#ssafy_logo {
+  width: 70%;
+  height: inherit;
+}
+.footer__body {
+  flex: 9;
+  height: 100%;
+}
+.footer__url {
+  height: 2rem;
+  display: flex;
+  padding: 10px;
+}
+.footer__text {
+  height: 40%;
+  color: #8c99a8;
+  margin-top: 15px;
+  font-size: 12px;
+}
+.footer__copyright {
+  color: #8c99a8;
+}
 </style>

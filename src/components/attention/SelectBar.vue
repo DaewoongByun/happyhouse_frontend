@@ -49,71 +49,71 @@
 </template>
 
 <script>
-  import { mapActions } from "vuex";
-  export default {
-    name: "SelectBar",
-    data() {
-      return {
-        rank: [],
-        category: {
-          mart: "대형마트",
-          cafe: "카페",
-          hospital: "병원",
-          culture: "문화시설",
-          conv: "편의점",
-          school: "학교",
-          subway: "지하철",
-        },
-      };
-    },
-    methods: {
-      ...mapActions("attentionStore", ["orderByRank"]),
-      change: function (e) {
-        console.log(this.rank);
-        if (this.rank.length > 3) {
-          setTimeout(() => {
-            this.$refs[e.target.value].checked = false;
-            this.rank.pop();
-          }, 100);
-        } else {
-          this.orderByRank(this.rank);
-        }
+import { mapActions } from "vuex";
+export default {
+  name: "SelectBar",
+  data() {
+    return {
+      rank: [],
+      category: {
+        mart: "대형마트",
+        cafe: "카페",
+        hospital: "병원",
+        culture: "문화시설",
+        conv: "편의점",
+        school: "학교",
+        subway: "지하철",
       },
-      unCheckAll: function () {
-        this.rank.forEach((item) => {
-          this.$refs[item].checked = false;
-        });
-        this.rank.forEach((item) => {
-          this.$refs[item].checked = false;
-        });
-      },
+    };
+  },
+  methods: {
+    ...mapActions("attentionStore", ["orderByRank"]),
+    change: function (e) {
+      console.log(this.rank);
+      if (this.rank.length > 3) {
+        setTimeout(() => {
+          this.$refs[e.target.value].checked = false;
+          this.rank.pop();
+        }, 100);
+      } else {
+        this.orderByRank(this.rank);
+      }
     },
-  };
+    unCheckAll: function () {
+      this.rank.forEach((item) => {
+        this.$refs[item].checked = false;
+      });
+      this.rank.forEach((item) => {
+        this.$refs[item].checked = false;
+      });
+    },
+  },
+};
 </script>
 
 <style scoped>
-  #select-bar {
-    flex-direction: column;
-    height: 100px;
-    width: 100%;
-    justify-content: space-between;
-  }
-  .title {
-    font-size: 25px;
-    font-weight: 700;
-  }
-  .select {
-    width: 100%;
-    justify-content: space-around;
-    border-bottom: 1px solid rgba(0 0 0 / 0.24);
-  }
-  .rank {
-    width: 80%;
-    justify-content: space-around;
-    font-size: 20px;
-  }
-  .category-name {
-    font-weight: 600;
-    font-size: 18px;
-  }
+#select-bar {
+  flex-direction: column;
+  height: 100px;
+  width: 100%;
+  justify-content: space-between;
+}
+.title {
+  font-size: 25px;
+  font-weight: 700;
+}
+.select {
+  width: 100%;
+  justify-content: space-around;
+  border-bottom: 1px solid rgba(0 0 0 / 0.24);
+}
+.rank {
+  width: 80%;
+  justify-content: space-around;
+  font-size: 20px;
+}
+.category-name {
+  font-weight: 600;
+  font-size: 18px;
+}
 </style>

@@ -8,18 +8,18 @@
 </template>
 
 <script>
-  export default {
-    name: "NoticeListItem",
-    props: ["item"],
-    data() {
-      return {};
+export default {
+  name: "NoticeListItem",
+  props: ["item"],
+  data() {
+    return {};
+  },
+  methods: {
+    getDetail() {
+      this.$router.push(`/notice/${this.item.no}`);
     },
-    methods: {
-      getDetail() {
-        this.$router.push(`/notice/${this.item.no}`);
-      },
-    },
-  };
+  },
+};
 </script>
 
 <style></style>

@@ -36,83 +36,83 @@
 </template>
 
 <script>
-  import axios from "axios";
-  export default {
-    name: "Compare",
-    props: ["compareList"],
-    methods: {
-      exitCompare: function () {
-        this.$emit("exitCompare");
+import axios from "axios";
+export default {
+  name: "Compare",
+  props: ["compareList"],
+  methods: {
+    exitCompare: function () {
+      this.$emit("exitCompare");
+    },
+  },
+  data() {
+    return {
+      houseList: [],
+    };
+  },
+  created() {
+    const loginUser = JSON.parse(localStorage.getItem("loginUser"));
+    const url = `http://localhost:8000/search/compare`;
+    const codes = this.compareList.toString();
+    axios({
+      method: "get",
+      url: url,
+      headers: {
+        Authorization: loginUser.token,
       },
-    },
-    data() {
-      return {
-        houseList: [],
-      };
-    },
-    created() {
-      const loginUser = JSON.parse(localStorage.getItem("loginUser"));
-      const url = `http://localhost:8000/search/compare`;
-      const codes = this.compareList.toString();
-      axios({
-        method: "get",
-        url: url,
-        headers: {
-          Authorization: loginUser.token,
-        },
-        params: {
-          codes: codes,
-        },
+      params: {
+        codes: codes,
+      },
+    })
+      .then((response) => {
+        this.houseList = response.data.compareList;
       })
-        .then((response) => {
-          this.houseList = response.data.compareList;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
-  };
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+};
 </script>
 
 <style scoped>
-  #compare {
-    width: 100%;
-    height: 1000px;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-  }
-  .table-container {
-    width: 100%;
-    justify-content: flex-start;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  }
-  .category-container {
-    flex-direction: column;
-    border-right: 1px solid rgb(0 0 0 / 24%);
-  }
-  .house-container {
-    flex-direction: column;
-    flex: 1;
-    border-right: 1px solid rgb(0 0 0 / 24%);
-  }
-  .category-container > div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100px;
-    height: 50px;
-    border-bottom: 1px solid rgb(0 0 0 / 24%);
-  }
-  .house-container > div {
-    width: 100%;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-bottom: 1px solid rgb(0 0 0 / 24%);
-  }
-  .button-container {
-    margin-top: 10px;
-  }
+#compare {
+  width: 100%;
+  height: 1000px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.table-container {
+  width: 100%;
+  justify-content: flex-start;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.category-container {
+  flex-direction: column;
+  border-right: 1px solid rgb(0 0 0 / 24%);
+}
+.house-container {
+  flex-direction: column;
+  flex: 1;
+  border-right: 1px solid rgb(0 0 0 / 24%);
+}
+.category-container > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 50px;
+  border-bottom: 1px solid rgb(0 0 0 / 24%);
+}
+.house-container > div {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid rgb(0 0 0 / 24%);
+}
+.button-container {
+  margin-top: 10px;
+}
 </style>

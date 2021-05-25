@@ -27,59 +27,59 @@
 </template>
 
 <script>
-  import { mapGetters } from "vuex";
-  import HouseInfoItem from "./HouseInfoItem";
-  export default {
-    name: "HouseInfo",
-    computed: {
-      ...mapGetters(["houseinfos", "orderedHouseinfos", "isLoading"]),
+import { mapGetters } from "vuex";
+import HouseInfoItem from "./HouseInfoItem";
+export default {
+  name: "HouseInfo",
+  computed: {
+    ...mapGetters(["houseinfos", "orderedHouseinfos", "isLoading"]),
+  },
+  components: {
+    HouseInfoItem,
+  },
+  watch: {
+    isLoading: function () {
+      this.$emit("compareReset");
     },
-    components: {
-      HouseInfoItem,
+  },
+  props: ["compareList"],
+  methods: {
+    addCompare: function (no) {
+      this.compareList.push(no);
     },
-    watch: {
-      isLoading: function () {
-        this.$emit("compareReset");
-      },
-    },
-    props: ["compareList"],
-    methods: {
-      addCompare: function (no) {
-        this.compareList.push(no);
-      },
-      deleteCompare: function (no) {
-        for (let i = 0; i < this.compareList.length; i++) {
-          if (this.compareList[i] == no) {
-            this.compareList.splice(i, 1);
-            break;
-          }
+    deleteCompare: function (no) {
+      for (let i = 0; i < this.compareList.length; i++) {
+        if (this.compareList[i] == no) {
+          this.compareList.splice(i, 1);
+          break;
         }
-      },
-      compare: function () {
-        if (this.compareList.length > 0) {
-          this.$emit("compare", this.compareList);
-        }
-      },
+      }
     },
-  };
+    compare: function () {
+      if (this.compareList.length > 0) {
+        this.$emit("compare", this.compareList);
+      }
+    },
+  },
+};
 </script>
 
 <style scoped>
-  #house-info {
-    flex-direction: column;
-    justify-content: flex-start;
-    width: 100%;
-    height: 100%;
-  }
-  .compare-btn {
-  }
-  .button-container {
-    width: 100%;
-    padding: 10px;
-    justify-content: flex-end;
-  }
-  .info-item {
-    overflow-y: auto;
-    width: 100%;
-  }
+#house-info {
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100%;
+}
+.compare-btn {
+}
+.button-container {
+  width: 100%;
+  padding: 10px;
+  justify-content: flex-end;
+}
+.info-item {
+  overflow-y: auto;
+  width: 100%;
+}
 </style>

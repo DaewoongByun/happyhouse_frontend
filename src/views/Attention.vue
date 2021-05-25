@@ -34,101 +34,101 @@
 </template>
 
 <script>
-  import { mapGetters, mapActions } from "vuex";
-  import SelectBar from "../components/attention/SelectBar";
-  import HouseInfo from "../components/attention/HouseInfo";
-  import HouseDeal from "../components/attention/HouseDeal";
-  import Map from "../components/attention/Map";
-  import Chart from "../components/attention/Chart";
-  import Compare from "../components/attention/Compare";
+import { mapGetters, mapActions } from "vuex";
+import SelectBar from "../components/attention/SelectBar";
+import HouseInfo from "../components/attention/HouseInfo";
+import HouseDeal from "../components/attention/HouseDeal";
+import Map from "../components/attention/Map";
+import Chart from "../components/attention/Chart";
+import Compare from "../components/attention/Compare";
 
-  export default {
-    name: "Attention",
-    data() {
-      return {
-        isCompare: false,
-        compareList: [],
-      };
+export default {
+  name: "Attention",
+  data() {
+    return {
+      isCompare: false,
+      compareList: [],
+    };
+  },
+  methods: {
+    ...mapActions("attentionStore", ["destroy"]),
+    compare: function (compareList) {
+      this.compareList = compareList;
+      this.isCompare = true;
     },
-    methods: {
-      ...mapActions("attentionStore", ["destroy"]),
-      compare: function (compareList) {
-        this.compareList = compareList;
-        this.isCompare = true;
-      },
-      exitCompare: function () {
-        this.isCompare = false;
-      },
-      compareReset: function () {
-        this.compareList = [];
-      },
+    exitCompare: function () {
+      this.isCompare = false;
     },
-    components: {
-      SelectBar,
-      AttentionInfo: HouseInfo,
-      AttentionDeal: HouseDeal,
-      Map,
-      Chart,
-      Compare,
+    compareReset: function () {
+      this.compareList = [];
     },
-    destroyed() {
-      this.destroy();
-    },
-  };
+  },
+  components: {
+    SelectBar,
+    AttentionInfo: HouseInfo,
+    AttentionDeal: HouseDeal,
+    Map,
+    Chart,
+    Compare,
+  },
+  destroyed() {
+    this.destroy();
+  },
+};
 </script>
 
 <style scoped>
-  #attention {
-    margin-top: 20px;
-    height: auto;
-    flex-direction: column;
-  }
-  .attention__top {
-    width: 100%;
-    height: 150px;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  }
-  .attention__top__searchBar {
-    height: 100%;
-    flex: 4;
-    align-items: flex-start;
-    margin-right: 10px;
-  }
-  .attention__top__selectBar {
-    height: 100%;
-    width: 50%;
-  }
+#attention {
+  margin-top: 20px;
+  height: auto;
+  flex-direction: column;
+}
+.attention__top {
+  width: 100%;
+  height: 150px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.attention__top__searchBar {
+  height: 100%;
+  flex: 4;
+  align-items: flex-start;
+  margin-right: 10px;
+}
+.attention__top__selectBar {
+  height: 100%;
+  width: 50%;
+}
 
-  .attention__mid {
-    width: 100%;
-    height: 600px;
-    margin-bottom: 20px;
-    margin-top: 20px;
-  }
-  .attention__mid__apt {
-    height: 100%;
-    flex: 4;
-    margin-right: 10px;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  }
-  .attention__mid__apt__info {
-    height: 100%;
-    flex: 1;
-  }
-  .attention__mid__apt__deal {
-    height: 100%;
-    flex: 1;
-  }
-  .attention__mid__map {
-    flex: 6;
-    height: 100%;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  }
-  .attention__bottom {
-    width: 100%;
-  }
-  .attention__bottom__chart {
-    width: 100%;
-    height: auto;
-  }
+.attention__mid {
+  width: 100%;
+  height: 600px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+.attention__mid__apt {
+  height: 100%;
+  flex: 4;
+  margin-right: 10px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.attention__mid__apt__info {
+  height: 100%;
+  flex: 1;
+}
+.attention__mid__apt__deal {
+  height: 100%;
+  flex: 1;
+}
+.attention__mid__map {
+  flex: 6;
+  height: 100%;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.attention__bottom {
+  width: 100%;
+}
+.attention__bottom__chart {
+  width: 100%;
+  height: auto;
+}
 </style>

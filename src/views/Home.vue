@@ -1,63 +1,138 @@
 <template>
-  <div id="home">
+  <div id="home" class="flex-box">
+    <div :class="y > 0 ? 'small-img' : 'img'">
+      <div class="home-text" ref="homeText">
+        <div class="home-text__title">
+          쾌락과 궁전 속을 거니는 것도<br />언제나 초라한 내 집보다 편안하지는 않다.
+        </div>
+        <div class="home-text__sub">-J.H.페인 즐거운 나의 집 중-</div>
+      </div>
+      <div class="arrow" :class="y > 0 ? 'invisible' : ''">
+        <b-icon
+          icon="arrow-down"
+          animation="cylon-vertical"
+          font-scale="4"
+          style="color: white"
+        ></b-icon>
+      </div>
+    </div>
     <div class="home__searchbar">
       <search-bar></search-bar>
-    </div>
-    <div id="backimg">
-      <!-- <img id="backimg" src="../assets/house/wallpaper6.jpg" /> -->
     </div>
   </div>
 </template>
 
 <script>
-  let nystories = document.querySelector("div").offsetTop;
-  window.onscroll = function () {
-    if (window.pageYOffset > 0) {
-      let opac = window.pageYOffset / nystories;
-      console.log(opac);
-      document.getElementById("backimg").style.background =
-        "linear-gradient(rgba(255, 255, 255, " +
-        opac +
-        "), rgba(255, 255, 255, " +
-        opac +
-        ")), url(../assets/house/wallpaper6.jpg)";
-    }
-  };
-  import SearchBar from "../components/home/SearchBar";
-  export default {
-    name: "Home",
-    components: {
-      SearchBar,
+import SearchBar from "../components/home/SearchBar";
+export default {
+  name: "Home",
+  components: {
+    SearchBar,
+  },
+  data() {
+    return {
+      y: 0,
+    };
+  },
+  methods: {
+    handleScroll() {
+      this.y = window.scrollY;
+      if (this.y > 0) {
+        this.$refs.homeText.classList.add("disappear");
+        this.$refs.homeText.classList.add("invisible");
+      } else {
+        this.$refs.homeText.classList.remove("invisible");
+        this.$refs.homeText.classList.remove("disappear");
+        this.$refs.homeText.classList.add("appear");
+      }
     },
-  };
+  },
+  mounted() {
+    window.addEventListener("scroll", this.handleScroll);
+  },
+  destroyed() {
+    window.removeEventListener("scroll", this.handleScroll);
+  },
+};
 </script>
 
 <style scoped>
-  #home {
-    min-height: 1000px;
-  }
-  .home__searchbar {
-    height: 50px;
-  }
-  img {
-    width: 100%;
-    height: 700px;
-  }
-  img:hover {
-    filter: brightness(60%);
-    transition: filter 1s;
-  }
+#home {
+  min-height: 1000px;
+  width: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.home__searchbar {
+  height: 50px;
+  width: 100%;
+}
 
-  #backimg {
-    height: 700px;
-    width: 100%;
-    background-image: url("../assets/house/wallpaper6.jpg");
-    background-repeat: no-repeat;
-    background-attachment: fixed !important;
-    background-size: 100% !important;
-    background-position: center top !important;
-    padding: 1rem;
-    padding-top: 45%;
-    color: #fff;
+.img {
+  width: 100%;
+  height: 1000px;
+  background-image: url("../assets/house/wallpaper6.jpg");
+  transition-duration: 1s;
+  position: fixed;
+  top: 0;
+}
+.small-img {
+  width: 1200px;
+  height: 360px;
+  background-image: url("../assets/house/wallpaper6.jpg");
+  transition-duration: 1s;
+}
+.arrow {
+  position: fixed;
+  bottom: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.invisible {
+  display: none;
+  transition-delay: 0.8s;
+}
+.home-text__title {
+  font-size: 50px;
+}
+.home-text__sub {
+  font-size: 30px;
+}
+.home-text {
+  position: fixed;
+  left: 100px;
+  top: 20%;
+  color: black;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+}
+.appear {
+  animation: fade-in 0.8s;
+  animation-fill-mode: forwards;
+  display: flex;
+}
+
+.disappear {
+  animation: fade-out 0.8s;
+  animation-fill-mode: forwards;
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
   }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
 </style>
