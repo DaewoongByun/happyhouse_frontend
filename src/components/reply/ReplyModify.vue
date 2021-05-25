@@ -1,16 +1,9 @@
 <template>
-  <div id="reply-modify">
-      sadfjasdlkfjaksldf;
-
-  </div>
+  <div id="reply-modify">sadfjasdlkfjaksldf;</div>
 </template>
 
 <script>
-export default {
-
-}
+  export default {};
 </script>
 
-<style>
-
-</style>
+<style></style>

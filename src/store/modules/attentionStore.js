@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 const attentionStore = {
   namespaced: true,
   state: {
@@ -11,7 +11,7 @@ const attentionStore = {
       lat: 36.35513321021629,
       lng: 127.29836175576918,
     },
-    selectedAttentionName: '',
+    selectedAttentionName: "",
   },
   getters: {
     attentionList: (state) => state.attentionList,
@@ -55,7 +55,7 @@ const attentionStore = {
     DESTROY(state) {
       state.attentionDeals = [];
       state.selectedAttention = {};
-      state.selectedAttentionName = '';
+      state.selectedAttentionName = "";
     },
     DELETE_ATTENTION(state, info) {
       for (let i = 0; i < state.attentionList.length; i++) {
@@ -69,19 +69,19 @@ const attentionStore = {
   },
   actions: {
     deleteAttention({ commit }, info) {
-      const loginUser = JSON.parse(localStorage.getItem('loginUser'));
+      const loginUser = JSON.parse(localStorage.getItem("loginUser"));
       const url = `http://localhost:8000/member/attention/${info.no}`;
       axios({
-        method: 'delete',
+        method: "delete",
         url: url,
         headers: {
-          'Authorization': loginUser.token,
+          Authorization: loginUser.token,
         },
       })
         .then((response) => {
           console.log(response);
-          if (response.data == 'Success') {
-            commit('DELETE_ATTENTION', info);
+          if (response.data == "Success") {
+            commit("DELETE_ATTENTION", info);
           }
         })
         .catch((error) => {
@@ -89,30 +89,30 @@ const attentionStore = {
         });
     },
     destroy({ commit }) {
-      commit('DESTROY');
+      commit("DESTROY");
     },
     orderByRank({ commit }, rank) {
-      commit('ORDER_BY_RANK', rank);
+      commit("ORDER_BY_RANK", rank);
     },
     setMapCenter({ commit }, center) {
-      commit('SET_MAP_CENTER', center);
+      commit("SET_MAP_CENTER", center);
     },
     setAttentionDeals({ commit }, data) {
-      commit('SET_ATTENTION_DEALS', data);
+      commit("SET_ATTENTION_DEALS", data);
     },
     getAttentionList({ commit, state }) {
-      const loginUser = JSON.parse(localStorage.getItem('loginUser'));
+      const loginUser = JSON.parse(localStorage.getItem("loginUser"));
       const url = `http://localhost:8000/member/attention`;
       state.isLoading = true;
       axios({
-        method: 'get',
+        method: "get",
         url: url,
         headers: {
-          'Authorization': loginUser.token,
+          Authorization: loginUser.token,
         },
       })
         .then((response) => {
-          commit('GET_ATTENTION_LIST', response.data.attention);
+          commit("GET_ATTENTION_LIST", response.data.attention);
           state.isLoading = false;
         })
         .catch((error) => {
