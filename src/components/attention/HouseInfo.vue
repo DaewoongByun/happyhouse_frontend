@@ -24,58 +24,58 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
-import HouseInfoItem from "./HouseInfoItem";
-export default {
-  name: "HouseInfo",
-  components: {
-    HouseInfoItem,
-  },
-  computed: {
-    ...mapGetters("attentionStore", ["orderedAttentionList", "isLoading"]),
-  },
-  methods: {
-    ...mapActions("attentionStore", ["getAttentionList"]),
-    addCompare: function (no) {
-      this.compareList.push(no);
+  import { mapGetters, mapActions } from "vuex";
+  import HouseInfoItem from "./HouseInfoItem";
+  export default {
+    name: "HouseInfo",
+    components: {
+      HouseInfoItem,
     },
-    deleteCompare: function (no) {
-      for (let i = 0; i < this.compareList.length; i++) {
-        if (this.compareList[i] == no) {
-          this.compareList.splice(i, 1);
-          break;
+    computed: {
+      ...mapGetters("attentionStore", ["orderedAttentionList", "isLoading"]),
+    },
+    methods: {
+      ...mapActions("attentionStore", ["getAttentionList"]),
+      addCompare: function (no) {
+        this.compareList.push(no);
+      },
+      deleteCompare: function (no) {
+        for (let i = 0; i < this.compareList.length; i++) {
+          if (this.compareList[i] == no) {
+            this.compareList.splice(i, 1);
+            break;
+          }
         }
-      }
+      },
+      compare: function () {
+        if (this.compareList.length > 0) {
+          this.$emit("compare", this.compareList);
+        }
+      },
     },
-    compare: function () {
-      if (this.compareList.length > 0) {
-        this.$emit("compare", this.compareList);
-      }
+    watch: {
+      isLoading: function () {
+        this.$emit("compareReset");
+      },
     },
-  },
-  watch: {
-    isLoading: function () {
-      this.$emit("compareReset");
+    props: ["compareList"],
+    created() {
+      this.getAttentionList();
     },
-  },
-  props: ["compareList"],
-  created() {
-    this.getAttentionList();
-  },
-};
+  };
 </script>
 
 <style scoped>
-#house-info {
-  flex-direction: column;
-  justify-content: flex-start;
-  width: 100%;
-  height: 100%;
-  overflow-y: auto;
-}
-.button-container {
-  width: 100%;
-  padding: 10px;
-  justify-content: flex-end;
-}
+  #house-info {
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+  }
+  .button-container {
+    width: 100%;
+    padding: 10px;
+    justify-content: flex-end;
+  }
 </style>
