@@ -6,6 +6,8 @@ import MemberRegistForm from '../components/member/MemberRegistForm';
 import MemberMyPage from '../components/member/MemberMyPage';
 import House from '../views/House';
 import Notice from '../views/Notice';
+import Attention from '../views/Attention';
+
 import NoticeList from '../components/notice/NoticeList';
 import NoticeArticle from '../components/notice/NoticeArticle';
 import NoticeModify from '../components/notice/NoticeModify';
@@ -70,6 +72,11 @@ const routes = [
       },
 
     ]
+  },
+  {
+    path: '/attention',
+    name: 'Attention',
+    component: Attention,
   },
   {
     path: '/board',

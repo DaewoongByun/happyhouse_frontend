@@ -64,11 +64,13 @@ export default {
       }, 200);
     },
     search: function (item, i) {
+      const city = item.split(' ')[0];
+      const gugun = item.split(' ')[1];
       const dong = item.split(' ')[2];
       const code = this.codes[i];
       console.log(code + ' ' + dong);
       this.searchWord = item;
-      this.setHouseinfos({ dong, code });
+      this.setHouseinfos({ dong, code, city, gugun });
       this.$router.push('/house');
     },
   },

@@ -20,7 +20,7 @@ export default {
   methods: {
     ...mapActions(['setHouseDeals']),
     initMap() {
-      if (this.houseinfos.length === 0) {
+      if (this.attentionList.length === 0) {
         const container = document.querySelector('#map');
         const options = {
           center: new kakao.maps.LatLng(this.mapCenter.lat, this.mapCenter.lng),
@@ -34,7 +34,7 @@ export default {
           level: 5,
         };
         const map = new kakao.maps.Map(container, options);
-        this.houseinfos.forEach((info) => {
+        this.attentionList.forEach((info) => {
           const markerPosition = new kakao.maps.LatLng(info.lat, info.lng);
           // 마커를 생성합니다
           const marker = new kakao.maps.Marker({
@@ -48,11 +48,11 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['houseinfos', 'mapCenter']),
+    ...mapGetters('attentionStore', ['attentionList', 'mapCenter']),
   },
   watch: {
     mapCenter: function () {
-      if (this.houseinfos.length === 0) {
+      if (this.attentionList.length === 0) {
         this.initMap();
         return;
       }
@@ -62,7 +62,7 @@ export default {
         level: 3,
       };
       const map = new kakao.maps.Map(container, options);
-      this.houseinfos.forEach((info) => {
+      this.attentionList.forEach((info) => {
         const markerPosition = new kakao.maps.LatLng(info.lat, info.lng);
         // 마커를 생성합니다
         const marker = new kakao.maps.Marker({
@@ -73,8 +73,8 @@ export default {
         marker.setMap(map);
       });
     },
-    houseinfos: function () {
-      if (this.houseinfos.length === 0) {
+    attentionList: function () {
+      if (this.attentionList.length === 0) {
         this.initMap();
         return;
       }
@@ -84,7 +84,7 @@ export default {
         level: 6,
       };
       const map = new kakao.maps.Map(container, options);
-      this.houseinfos.forEach((info) => {
+      this.attentionList.forEach((info) => {
         const markerPosition = new kakao.maps.LatLng(info.lat, info.lng);
         // 마커를 생성합니다
         const marker = new kakao.maps.Marker({

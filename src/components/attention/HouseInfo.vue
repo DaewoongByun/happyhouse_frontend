@@ -1,11 +1,11 @@
 <template>
   <div id="house-info" class="flex-box">
     <template v-if="!isLoading">
-      <div class="flex-box noresult" v-if="orderedHouseinfos.length == 0">
+      <div class="flex-box noresult" v-if="orderedAttentionList.length == 0">
         검색 결과가 없습니다.
       </div>
       <house-info-item
-        v-for="(houseinfo, i) in orderedHouseinfos"
+        v-for="(houseinfo, i) in orderedAttentionList"
         :key="i"
         :houseinfo="houseinfo"
         :idx="i"
@@ -13,7 +13,7 @@
         @addCompare="addCompare"
         @deleteCompare="deleteCompare"
       ></house-info-item>
-      <div class="button-container flex-box" v-if="orderedHouseinfos.length > 0">
+      <div class="button-container flex-box" v-if="orderedAttentionList.length > 0">
         <div class="button flex-box compare-btn" @click="compare">비교하기</div>
       </div>
     </template>
@@ -24,23 +24,18 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import HouseInfoItem from './HouseInfoItem';
 export default {
   name: 'HouseInfo',
-  computed: {
-    ...mapGetters(['houseinfos', 'orderedHouseinfos', 'isLoading']),
-  },
   components: {
     HouseInfoItem,
   },
-  watch: {
-    isLoading: function () {
-      this.$emit('compareReset');
-    },
+  computed: {
+    ...mapGetters('attentionStore', ['orderedAttentionList', 'isLoading']),
   },
-  props: ['compareList'],
   methods: {
+    ...mapActions('attentionStore', ['getAttentionList']),
     addCompare: function (no) {
       this.compareList.push(no);
     },
@@ -58,6 +53,15 @@ export default {
       }
     },
   },
+  watch: {
+    isLoading: function () {
+      this.$emit('compareReset');
+    },
+  },
+  props: ['compareList'],
+  created() {
+    this.getAttentionList();
+  },
 };
 </script>
 
@@ -68,8 +72,6 @@ export default {
   width: 100%;
   height: 100%;
   overflow-y: auto;
-}
-.compare-btn {
 }
 .button-container {
   width: 100%;

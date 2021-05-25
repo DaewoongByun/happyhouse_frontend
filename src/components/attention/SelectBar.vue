@@ -64,7 +64,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['orderByRank']),
+    ...mapActions('attentionStore', ['orderByRank']),
     change: function (e) {
       console.log(this.rank);
       if (this.rank.length > 3) {
