@@ -1,11 +1,12 @@
 <template>
   <div id="Notice_List">
     <div>
-      <b-table-simple responsive id="noticeTable">
+      <b-table-simple responsive id="noticeTable" caption-top>
+        <template v-if="num == null" #table-caption>This is a table caption at the top.</template>
         <b-thead>
           <b-tr>
             <b-th>번호</b-th>
-            <b-th class="Notice__title">글 제목</b-th>
+            <b-th>글 제목</b-th>
             <b-th>작성자</b-th>
             <b-th>작성 시간</b-th>
           </b-tr>
@@ -23,6 +24,7 @@
       </b-table-simple>
     </div>
     <b-pagination
+      v-if="num == null"
       v-model="currentPage"
       :total-rows="noticelength"
       :per-page="perPage"
@@ -37,6 +39,7 @@
   import NoticeItem from "./NoticeListItem";
   export default {
     name: "NoticeList",
+    props: ["num"],
     data() {
       return {
         currentPage: 1,
@@ -50,9 +53,14 @@
       NoticeItem,
     },
     created() {
-      console.log("noticeList vue created");
       this.getNoticeList();
+      if (this.num == 3) {
+        this.perPage = this.num;
+      } else {
+        this.perPage = 10;
+      }
     },
+    mounted() {},
     methods: {
       ...mapActions(["getNoticeList"]),
     },
@@ -63,10 +71,14 @@
   #Notice_List {
     margin-top: 30px;
     min-height: 600px;
+    width: 100%;
   }
-
+  #noticeTable {
+    text-align: center;
+  }
   .Notice__item {
     cursor: pointer;
+    height: 50px;
   }
   .Notice__item:hover {
     background-color: whitesmoke;

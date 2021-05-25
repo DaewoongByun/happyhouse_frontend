@@ -4,10 +4,10 @@
       <b-table-simple responsive id="boardTable">
         <b-thead>
           <b-tr>
-            <b-th>번호</b-th>
-            <b-th class="board__title">글 제목</b-th>
-            <b-th>작성자</b-th>
-            <b-th>작성 시간</b-th>
+            <b-th style="width: 8.33%">번호</b-th>
+            <b-th style="width: 50%">글 제목</b-th>
+            <b-th style="width: 25%">작성자</b-th>
+            <b-th style="width: 16.66%">작성 시간</b-th>
           </b-tr>
         </b-thead>
         <b-tbody>
@@ -23,6 +23,7 @@
       </b-table-simple>
     </div>
     <b-pagination
+      v-if="num == null"
       v-model="currentPage"
       :total-rows="boardlength"
       :per-page="perPage"
@@ -37,6 +38,7 @@
   import BoardItem from "./BoardListItem";
   export default {
     name: "BoardList",
+    props: ["num"],
     data() {
       return {
         currentPage: 1,
@@ -52,6 +54,11 @@
     created() {
       // console.log("boardList vue created");
       this.getBoardList();
+      if (this.num == 3) {
+        this.perPage = this.num;
+      } else {
+        this.perPage = 10;
+      }
     },
     methods: {
       ...mapActions(["getBoardList"]),
@@ -63,16 +70,17 @@
   #Board_List {
     margin-top: 30px;
     min-height: 600px;
+    width: 100%;
   }
-
+  #boardTable {
+    text-align: center;
+  }
   .board__item {
     cursor: pointer;
+    height: 50px;
   }
 
   .board__item:hover {
     background-color: whitesmoke;
-  }
-  .board__title {
-    width: 600px;
   }
 </style>
