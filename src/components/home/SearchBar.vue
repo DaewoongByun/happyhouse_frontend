@@ -1,6 +1,6 @@
 <template>
   <div id="search-bar" class="flex-box">
-    <div class="search__content container flex-box">
+    <div class="search__content flex-box container">
       <b-icon-search> </b-icon-search>
       <input
         type="text"
@@ -80,43 +80,42 @@
 </script>
 
 <style scoped>
-  #search-bar {
-    margin-top: 20px;
-    flex-direction: column;
-    width: 100%;
-  }
-  .search__content {
-    width: 70%;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    box-sizing: border-box;
-  }
+#search-bar {
+  margin-top: 20px;
+  flex-direction: column;
+  width: 100%;
+}
+.search__content {
+  width: 70%;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  height: 50px;
+}
 
-  input {
-    height: 40px;
-    width: 100%;
-    border: none;
-    margin-left: 20px;
-  }
-  input:focus {
-    outline: none;
-  }
-  .list-container {
-    width: 70%;
-    padding: 0px 10px;
-    box-sizing: border-box;
-    max-height: 200px;
-    overflow-y: auto;
-    background-color: white;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  }
-  .list-item {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.24);
-    height: 50px;
-    justify-content: flex-start;
-    margin-bottom: 5px;
-    cursor: pointer;
-  }
-  .list-item:hover {
-    background-color: whitesmoke;
-  }
+input {
+  height: 40px;
+  width: 100%;
+  border: none;
+  /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
+  margin-left: 20px;
+}
+input:focus {
+  outline: none;
+}
+.list-container {
+  width: 70%;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.list-item {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.24);
+  height: 50px;
+  justify-content: flex-start;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+.list-item:hover {
+  background-color: whitesmoke;
+}
 </style>
