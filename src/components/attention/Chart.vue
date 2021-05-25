@@ -12,49 +12,49 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import { GChart } from 'vue-google-charts';
+import { mapGetters } from "vuex";
+import { GChart } from "vue-google-charts";
 export default {
-  name: 'Chart',
+  name: "Chart",
   computed: {
-    ...mapGetters('attentionStore', ['selectedAttention', 'selectedAttentionName']),
+    ...mapGetters("attentionStore", ["selectedAttention", "selectedAttentionName"]),
   },
   watch: {
     selectedAttention: function () {
       const data = [
-        ['', `${this.selectedAttentionName}가 속한 구의 평균`, `${this.selectedAttention.aptName}`],
+        ["", `${this.selectedAttentionName}가 속한 구의 평균`, `${this.selectedAttention.aptName}`],
         [
-          '가장 가까운 대형마트(m)',
+          "가장 가까운 대형마트(m)",
           Math.round(this.selectedAttention.houseValue.avgValue.martvalue),
           Math.round(this.selectedAttention.houseValue.martvalue),
         ],
         [
-          '가장 가까운 편의점(m)',
+          "가장 가까운 편의점(m)",
           Math.round(this.selectedAttention.houseValue.avgValue.convvalue),
           Math.round(this.selectedAttention.houseValue.convvalue),
         ],
         [
-          '가장 가까운 학교(m)',
+          "가장 가까운 학교(m)",
           Math.round(this.selectedAttention.houseValue.avgValue.schoolvalue),
           Math.round(this.selectedAttention.houseValue.schoolvalue),
         ],
         [
-          '가장 가까운 지하철(m)',
+          "가장 가까운 지하철(m)",
           Math.round(this.selectedAttention.houseValue.avgValue.subwayvalue),
           Math.round(this.selectedAttention.houseValue.subwayvalue),
         ],
         [
-          '가장 가까운 병원(m)',
+          "가장 가까운 병원(m)",
           Math.round(this.selectedAttention.houseValue.avgValue.hospitalvalue),
           Math.round(this.selectedAttention.houseValue.hospitalvalue),
         ],
         [
-          '20km 이내 문화시설 개수(개)',
+          "20km 이내 문화시설 개수(개)",
           Math.round(this.selectedAttention.houseValue.avgValue.culturevalue),
           Math.round(this.selectedAttention.houseValue.culturevalue),
         ],
         [
-          '1km 이내 카페 개수(개)',
+          "1km 이내 카페 개수(개)",
           Math.round(this.selectedAttention.houseValue.avgValue.cafevalue),
           Math.round(this.selectedAttention.houseValue.cafevalue),
         ],
@@ -62,9 +62,9 @@ export default {
       this.chartData = data;
       const options = {
         chart: {
-          title: '카테고리별 점수 비교',
+          title: "카테고리별 점수 비교",
         },
-        bars: 'horizontal',
+        bars: "horizontal",
         height: 600,
         width: 1000,
       };
@@ -77,12 +77,12 @@ export default {
   data() {
     return {
       chartData: [
-        ['', ''],
-        ['', ''],
+        ["", ""],
+        ["", ""],
       ],
       chartOptions: {
         chart: {
-          title: '',
+          title: "",
         },
         height: 0,
         width: 0,

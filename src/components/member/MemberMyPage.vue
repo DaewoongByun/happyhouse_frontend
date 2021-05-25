@@ -12,10 +12,10 @@
 </template>
 
 <script>
-import MyPageDefault from './mypage/MemberMyPageDefault';
-import MyPagePw from './mypage/MemberMyPagePw';
+import MyPageDefault from "./mypage/MemberMyPageDefault";
+import MyPagePw from "./mypage/MemberMyPagePw";
 export default {
-  name: 'MemberMyPage',
+  name: "MemberMyPage",
   data() {
     return {
       index: 1,

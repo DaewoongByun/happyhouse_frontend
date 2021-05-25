@@ -2,15 +2,21 @@
   <div id="my-page-pw" class="flex-box">
     <div class="input-container flex-box">
       <label for="">현재 비밀번호</label>
-      <input type="text" placeholder="현재 비밀번호" v-model="currentPassword" />
+      <input type="password" placeholder="현재 비밀번호" v-model="currentPassword" />
     </div>
     <div class="input-container flex-box">
       <label for="">새로운 비밀번호</label>
-      <input type="text" placeholder="새로운 비밀번호" v-model="newPassword" />
+      <input type="password" placeholder="새로운 비밀번호" v-model="newPassword" />
     </div>
     <div class="input-container flex-box">
       <label for="">새로운 비밀번호 확인</label>
-      <input type="text" placeholder="새로운 비밀번호" v-model="newPasswordConf" />
+      <input
+        type="password"
+        placeholder="새로운 비밀번호 확인"
+        v-model="newPasswordConf"
+        @keyup="check"
+      />
+      <div v-if="messageShow">불일치</div>
     </div>
     <div class="button-container flex-box">
       <button class="button" @click="modify">수정</button>
@@ -19,49 +25,62 @@
 </template>
 
 <script>
-import axios from 'axios';
-import { mapActions, mapGetters } from 'vuex';
+import axios from "axios";
+import { mapActions, mapGetters } from "vuex";
 export default {
-  name: 'MyPagePw',
+  name: "MyPagePw",
   data() {
     return {
-      currentPassword: '',
-      newPassword: '',
-      newPasswordConf: '',
+      currentPassword: "",
+      newPassword: "",
+      newPasswordConf: "",
+      messageShow: false,
     };
   },
   computed: {
-    ...mapGetters(['loginUser']),
+    ...mapGetters(["loginUser"]),
   },
   methods: {
-    ...mapActions(['logout']),
+    ...mapActions(["logout"]),
+    check: function () {
+      if (this.newPassword != this.newPasswordConf) {
+        this.messageShow = true;
+      } else {
+        this.messageShow = false;
+      }
+    },
     inputClear: function () {
-      this.currentPassword = '';
-      this.newPassword = '';
-      this.newPasswordConf = '';
+      this.currentPassword = "";
+      this.newPassword = "";
+      this.newPasswordConf = "";
     },
     modify: function () {
+      if (this.emptyCheck()) {
+        alert("모두 입력하세요");
+        return;
+      }
+
       const url = `http://localhost:8000/member/pass/${this.loginUser.id}`;
       axios({
-        method: 'put',
+        method: "put",
         url: url,
         data: {
           password: this.currentPassword,
           newPassword: this.newPassword,
         },
         headers: {
-          'Authorization': this.loginUser.token,
+          "Authorization": this.loginUser.token,
         },
       })
         .then((response) => {
-          alert('수정 완료');
+          alert("수정 완료");
           console.log(response);
           this.logout();
-          this.$router.push('/');
+          this.$router.push("/");
         })
         .catch((error) => {
           console.log(error);
-          alert('비밀번호를 확인하세요');
+          alert("비밀번호를 확인하세요");
           this.inputClear();
         });
     },

@@ -19,7 +19,7 @@
     </div>
     <div class="area-container flex-box">
       <div class="key">평수 :</div>
-      <div class="value">{{ housedeal.area }}</div>
+      <div class="value">{{ housedeal.area }}㎡</div>
     </div>
     <div class="floor-container flex-box">
       <div class="key">층수 :</div>
@@ -30,8 +30,8 @@
 
 <script>
 export default {
-  name: 'HouseDealItem',
-  props: ['housedeal', 'dealType'],
+  name: "HouseDealItem",
+  props: ["housedeal", "dealType"],
 };
 </script>
 
@@ -40,11 +40,14 @@ export default {
   width: 100%;
   height: 120px;
   flex-direction: column;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid rgba(27, 31, 35, 0.15);
   padding: 5px;
   align-items: flex-start;
 }
 .small {
   font-size: 12px;
+}
+img {
+  width: 20px;
 }
 </style>

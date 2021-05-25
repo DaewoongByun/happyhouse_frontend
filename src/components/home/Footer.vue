@@ -37,9 +37,7 @@ export default {};
 
 <style scoped>
 #footer {
-  /* background-color: #332221; */
   height: 150px;
-  margin: 20px;
   border-top: 1px solid #8c99a8;
 }
 li,
@@ -55,7 +53,7 @@ ul {
 .part__list li ::before {
   position: relative;
   left: 1px;
-  content: ' | ';
+  content: " | ";
 }
 .part__list li a {
   color: black;

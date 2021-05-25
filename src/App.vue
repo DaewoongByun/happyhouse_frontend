@@ -1,43 +1,44 @@
+/* eslint-disable */
 <template>
   <div id="app">
     <Header />
-    <NavBar />
     <router-view />
     <Footer />
   </div>
 </template>
 <script>
-import Header from './components/home/Header';
-import NavBar from './components/home/NavBar';
-import { mapActions } from 'vuex';
-import Footer from './components/home/Footer';
+import Header from "./components/home/Header";
+import { mapActions } from "vuex";
+import Footer from "./components/home/Footer";
 export default {
   components: {
     Header,
-    NavBar,
     Footer,
   },
-  
-    created() {
-    const loginUser = JSON.parse(localStorage.getItem('loginUser'));
+
+  created() {
+    const loginUser = JSON.parse(localStorage.getItem("loginUser"));
     if (loginUser) {
       this.setLogin(loginUser);
     }
   },
   methods: {
-    ...mapActions(['setLogin']),
+    ...mapActions(["setLogin"]),
   },
 };
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap");
+
 * {
-  font-family: 'Nanum Gothic', sans-serif;
+  font-family: "Nanum Gothic", sans-serif;
   box-sizing: border-box;
 }
 #app {
   height: auto;
+  background-color: white;
+  padding-top: 75px;
 }
 .container {
   margin-left: 3%;

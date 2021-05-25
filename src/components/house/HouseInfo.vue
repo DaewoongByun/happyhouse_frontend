@@ -4,19 +4,22 @@
       <div class="flex-box noresult" v-if="orderedHouseinfos.length == 0">
         검색 결과가 없습니다.
       </div>
-      <house-info-item
-        v-for="(houseinfo, i) in orderedHouseinfos"
-        :key="i"
-        :houseinfo="houseinfo"
-        :idx="i"
-        :isCompare="compareList.includes(houseinfo.no) ? true : false"
-        @addCompare="addCompare"
-        @deleteCompare="deleteCompare"
-      ></house-info-item>
       <div class="button-container flex-box" v-if="orderedHouseinfos.length > 0">
         <div class="button flex-box compare-btn" @click="compare">비교하기</div>
       </div>
+      <div class="info-item">
+        <house-info-item
+          v-for="(houseinfo, i) in orderedHouseinfos"
+          :key="i"
+          :houseinfo="houseinfo"
+          :idx="i"
+          :isCompare="compareList.includes(houseinfo.no) ? true : false"
+          @addCompare="addCompare"
+          @deleteCompare="deleteCompare"
+        ></house-info-item>
+      </div>
     </template>
+
     <div class="loading-bar" v-if="isLoading">
       <b-icon icon="arrow-clockwise" animation="spin" font-scale="4"></b-icon>
     </div>
@@ -24,22 +27,22 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import HouseInfoItem from './HouseInfoItem';
+import { mapGetters } from "vuex";
+import HouseInfoItem from "./HouseInfoItem";
 export default {
-  name: 'HouseInfo',
+  name: "HouseInfo",
   computed: {
-    ...mapGetters(['houseinfos', 'orderedHouseinfos', 'isLoading']),
+    ...mapGetters(["houseinfos", "orderedHouseinfos", "isLoading"]),
   },
   components: {
     HouseInfoItem,
   },
   watch: {
     isLoading: function () {
-      this.$emit('compareReset');
+      this.$emit("compareReset");
     },
   },
-  props: ['compareList'],
+  props: ["compareList"],
   methods: {
     addCompare: function (no) {
       this.compareList.push(no);
@@ -54,7 +57,7 @@ export default {
     },
     compare: function () {
       if (this.compareList.length > 0) {
-        this.$emit('compare', this.compareList);
+        this.$emit("compare", this.compareList);
       }
     },
   },
@@ -67,7 +70,6 @@ export default {
   justify-content: flex-start;
   width: 100%;
   height: 100%;
-  overflow-y: auto;
 }
 .compare-btn {
 }
@@ -75,5 +77,9 @@ export default {
   width: 100%;
   padding: 10px;
   justify-content: flex-end;
+}
+.info-item {
+  overflow-y: auto;
+  width: 100%;
 }
 </style>

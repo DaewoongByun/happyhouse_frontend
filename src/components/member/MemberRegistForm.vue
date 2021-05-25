@@ -8,10 +8,15 @@
         <input type="text" placeholder="이름" v-model="name" />
       </div>
       <div class="input-container flex-box">
-        <input type="text" placeholder="비밀번호" v-model="password" />
+        <input type="password" placeholder="비밀번호(최소 8자)" v-model="password" minlength="8" />
       </div>
       <div class="input-container flex-box">
-        <input type="text" placeholder="비밀번호 확인" v-model="passwordConfirm" />
+        <input
+          type="password"
+          placeholder="비밀번호 확인"
+          v-model="passwordConfirm"
+          minlength="8"
+        />
       </div>
       <div class="input-container flex-box">
         <input type="text" placeholder="휴대전화 번호" v-model="tel" />
@@ -27,17 +32,17 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 export default {
-  name: 'MemberRegistForm',
+  name: "MemberRegistForm",
   data() {
     return {
-      id: '',
-      password: '',
-      passwordConfirm: '',
-      name: '',
-      email: '',
-      tel: '',
+      id: "",
+      password: "",
+      passwordConfirm: "",
+      name: "",
+      email: "",
+      tel: "",
     };
   },
   methods: {
@@ -55,12 +60,12 @@ export default {
     },
     regist: function () {
       if (!this.emptyCheck()) {
-        alert('모든 항목을 입력하세요');
+        alert("모든 항목을 입력하세요");
         return;
       }
       axios({
-        method: 'post',
-        url: 'http://localhost:8000/member/regist',
+        method: "post",
+        url: "http://localhost:8000/member/regist",
         data: {
           id: this.id,
           password: this.password,
@@ -70,12 +75,12 @@ export default {
         },
       })
         .then((response) => {
-          alert('회원가입 성공');
-          console.log(this.$router.push('/'));
+          alert("회원가입 성공");
+          console.log(this.$router.push("/"));
           console.dir(response);
         })
         .catch((error) => {
-          alert('가입실패');
+          alert("가입실패");
           console.dir(error);
         });
     },

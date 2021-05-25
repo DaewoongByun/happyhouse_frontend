@@ -46,25 +46,25 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions } from "vuex";
 export default {
-  name: 'SelectBar',
+  name: "SelectBar",
   data() {
     return {
       rank: [],
       category: {
-        mart: '대형마트',
-        cafe: '카페',
-        hospital: '병원',
-        culture: '문화시설',
-        conv: '편의점',
-        school: '학교',
-        subway: '지하철',
+        mart: "대형마트",
+        cafe: "카페",
+        hospital: "병원",
+        culture: "문화시설",
+        conv: "편의점",
+        school: "학교",
+        subway: "지하철",
       },
     };
   },
   methods: {
-    ...mapActions('attentionStore', ['orderByRank']),
+    ...mapActions("attentionStore", ["orderByRank"]),
     change: function (e) {
       console.log(this.rank);
       if (this.rank.length > 3) {

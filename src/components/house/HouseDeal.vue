@@ -39,10 +39,10 @@
 </template>
 
 <script>
-import HouseDealItem from './HouseDealItem';
-import { mapGetters } from 'vuex';
+import HouseDealItem from "./HouseDealItem";
+import { mapGetters } from "vuex";
 export default {
-  name: 'HouseDeal',
+  name: "HouseDeal",
   data() {
     return {
       isTrade: true,
@@ -54,7 +54,7 @@ export default {
     HouseDealItem,
   },
   computed: {
-    ...mapGetters(['housedeals', 'selectedHouseName']),
+    ...mapGetters(["housedeals", "selectedHouseName"]),
   },
   watch: {
     housedeals: function () {
@@ -74,9 +74,9 @@ export default {
     },
     updateVisibleDeals() {
       if (this.isTrade) {
-        this.visibleDeals = this.housedeals.filter((deal) => deal.type.includes('Trade'));
+        this.visibleDeals = this.housedeals.filter((deal) => deal.type.includes("Trade"));
       } else if (this.isRent) {
-        this.visibleDeals = this.housedeals.filter((deal) => deal.type.includes('Rent'));
+        this.visibleDeals = this.housedeals.filter((deal) => deal.type.includes("Rent"));
       }
     },
   },
@@ -105,6 +105,7 @@ export default {
   margin-bottom: 10px;
   font-weight: 600;
   padding: 10px;
+  border-bottom: 1px solid rgba(27, 31, 35, 0.15);
 }
 .deals {
   flex-direction: column;

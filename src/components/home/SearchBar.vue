@@ -19,31 +19,31 @@
 </template>
 
 <script>
-import axios from 'axios';
-import { mapGetters, mapActions } from 'vuex';
+import axios from "axios";
+import { mapGetters, mapActions } from "vuex";
 export default {
-  name: 'SearchBar',
+  name: "SearchBar",
   data() {
     return {
-      searchWord: '',
+      searchWord: "",
       list: [],
       codes: [],
       listShow: false,
     };
   },
   computed: {
-    ...mapGetters(['loginUser']),
+    ...mapGetters(["loginUser"]),
   },
   methods: {
-    ...mapActions(['setHouseinfos']),
+    ...mapActions(["setHouseinfos"]),
     change: function () {
       console.log(this.searchWord);
       const url = `http://localhost:8000/search/address/${this.searchWord}`;
       axios({
-        method: 'get',
+        method: "get",
         url: url,
         headers: {
-          'Authorization': this.loginUser.token,
+          "Authorization": this.loginUser.token,
         },
       })
         .then((response) => {
@@ -64,14 +64,14 @@ export default {
       }, 200);
     },
     search: function (item, i) {
-      const city = item.split(' ')[0];
-      const gugun = item.split(' ')[1];
-      const dong = item.split(' ')[2];
+      const city = item.split(" ")[0];
+      const gugun = item.split(" ")[1];
+      const dong = item.split(" ")[2];
       const code = this.codes[i];
-      console.log(code + ' ' + dong);
+      console.log(code + " " + dong);
       this.searchWord = item;
       this.setHouseinfos({ dong, code, city, gugun });
-      this.$router.push('/house');
+      this.$router.push("/house");
     },
   },
 };
@@ -79,7 +79,7 @@ export default {
 
 <style scoped>
 #search-bar {
-  margin-top: 20px;
+  margin-top: 40px;
   flex-direction: column;
   width: 100%;
 }
@@ -93,10 +93,11 @@ input {
   box-sizing: border-box;
   max-height: 200px;
   overflow-y: auto;
+  background-color: white;
 }
 .list-item {
   border-bottom: 1px solid black;
-  height: 30px;
+  height: 50px;
   justify-content: flex-start;
   margin-bottom: 5px;
   cursor: pointer;

@@ -1,65 +1,64 @@
 <template>
   <div id="BoardSearchBar" class="Container flex-box">
     <select class="SearchSelector" v-model="key">
-        <option value="title" selected>제목</option>
-        <option value="user">작성자</option>
-        <option value="content">제목+내용</option>
+      <option value="title" selected>제목</option>
+      <option value="user">작성자</option>
+      <option value="content">제목+내용</option>
     </select>
-    <input type="text" placeholder="검색어를 입력하세요" v-model="word" @keyup.enter="searchWord">
+    <input type="text" placeholder="검색어를 입력하세요" v-model="word" @keyup.enter="searchWord" />
     <button @click="searchWord">검색</button>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions } from "vuex";
 export default {
-  name:"BoardSearchBar",
+  name: "BoardSearchBar",
   data() {
     return {
-      key : 'title',
-      word : '',
-    }
+      key: "title",
+      word: "",
+    };
   },
   methods: {
-    ...mapActions(['getBoardList']),
-    searchWord(){
+    ...mapActions(["getBoardList"]),
+    searchWord() {
       const map = {
-        key : this.key,
-        word : this.word,
+        key: this.key,
+        word: this.word,
       };
-      if(this.word.length > 0){
+      if (this.word.length > 0) {
         this.getBoardList(map);
-      }else{
+      } else {
         this.getBoardList();
       }
-      this.word = '';
-    }
+      this.word = "";
+    },
   },
-  
-}
+};
 </script>
 
 <style scoped>
-#NoticeSearchBar{
+#NoticeSearchBar {
   margin-top: 20px;
 }
 input {
   height: 40px;
   width: 70%;
 }
-.SearchSelector{
+.SearchSelector {
   height: 40px;
   width: 100px;
 }
-button{
+button {
   height: 40px;
   width: 70px;
-  background-color: #e7e7e7 ;
+  background-color: #e7e7e7;
   border-radius: 8px;
   transition-duration: 0.2s;
 }
 button:hover {
-  background-color: #4CAF50; /* Green */
+  background-color: #4caf50; /* Green */
   color: white;
 }
 </style>

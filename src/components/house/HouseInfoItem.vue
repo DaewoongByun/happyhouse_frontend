@@ -18,12 +18,12 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions } from "vuex";
 export default {
-  name: 'HouseInfoItem',
-  props: ['houseinfo', 'idx', 'isCompare'],
+  name: "HouseInfoItem",
+  props: ["houseinfo", "idx", "isCompare"],
   methods: {
-    ...mapActions(['setHouseDeals', 'setMapCenter', 'deleteAttention', 'addAttention']),
+    ...mapActions(["setHouseDeals", "setMapCenter", "deleteAttention", "addAttention"]),
     showDeals: function () {
       const data = this.houseinfo;
       this.setHouseDeals(data);
@@ -36,7 +36,7 @@ export default {
     },
     attentionToggle: function () {
       if (this.houseinfo.attention) {
-        if (confirm('관심목록에서 삭제하시겠습니까?')) {
+        if (confirm("관심목록에서 삭제하시겠습니까?")) {
           this.deleteAttention(this.houseinfo);
         }
       } else {
@@ -45,9 +45,9 @@ export default {
     },
     compareToggle: function () {
       if (this.isCompare) {
-        this.$emit('deleteCompare', this.houseinfo.no);
+        this.$emit("deleteCompare", this.houseinfo.no);
       } else {
-        this.$emit('addCompare', this.houseinfo.no);
+        this.$emit("addCompare", this.houseinfo.no);
       }
     },
   },
@@ -59,7 +59,7 @@ export default {
   width: 100%;
   height: 120px;
   flex-direction: column;
-  border-bottom: 1px solid black;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 .name-container {
   flex: 7;
