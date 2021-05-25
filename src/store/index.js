@@ -203,7 +203,7 @@ export default new Vuex.Store({
         method: "delete",
         url: url,
         headers: {
-          "Authorization": loginUser.token,
+          Authorization: loginUser.token,
         },
       })
         .then((response) => {
@@ -226,7 +226,7 @@ export default new Vuex.Store({
         method: "post",
         url: url,
         headers: {
-          "Authorization": loginUser.token,
+          Authorization: loginUser.token,
         },
       })
         .then((response) => {
@@ -256,7 +256,7 @@ export default new Vuex.Store({
         method: "get",
         url: url,
         headers: {
-          "Authorization": state.loginUser.token,
+          Authorization: state.loginUser.token,
         },
       })
         .then((response) => {
@@ -305,7 +305,7 @@ export default new Vuex.Store({
         method: "get",
         url: "http://localhost:8000/notice",
         headers: {
-          "Authorization": state.loginUser.token,
+          Authorization: state.loginUser.token,
         },
         params: params,
       })
@@ -322,7 +322,7 @@ export default new Vuex.Store({
         method: "get",
         url: "http://localhost:8000/board",
         headers: {
-          "Authorization": state.loginUser.token,
+          Authorization: state.loginUser.token,
         },
         params: params,
       })

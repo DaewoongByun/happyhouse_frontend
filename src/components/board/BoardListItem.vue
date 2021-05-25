@@ -8,18 +8,18 @@
 </template>
 
 <script>
-export default {
-  name: "BoardListItem",
-  props: ["item"],
-  data() {
-    return {};
-  },
-  methods: {
-    getDetail() {
-      this.$router.push(`/board/${this.item.no}`);
+  export default {
+    name: "BoardListItem",
+    props: ["item"],
+    data() {
+      return {};
     },
-  },
-};
+    methods: {
+      getDetail() {
+        this.$router.push(`/board/${this.item.no}`);
+      },
+    },
+  };
 </script>
 
 <style></style>

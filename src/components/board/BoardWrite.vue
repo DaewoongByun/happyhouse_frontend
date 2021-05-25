@@ -17,82 +17,82 @@
 </template>
 
 <script>
-import axios from "axios";
+  import axios from "axios";
 
-export default {
-  data() {
-    return {
-      article: {
-        title: "",
-        user: "",
-        content: "",
-      },
-    };
-  },
-  methods: {
-    writeArticle() {
-      const loginUser = JSON.parse(localStorage.getItem("loginUser"));
-      const user = loginUser.id;
-      this.article.user = user;
-      console.log(this.article);
-      axios({
-        method: "POST",
-        url: "http://localhost:8000/board",
-        headers: {
-          "Authorization": loginUser.token,
+  export default {
+    data() {
+      return {
+        article: {
+          title: "",
+          user: "",
+          content: "",
         },
-        data: this.article,
-      })
-        .then(() => {
-          alert("공지사항 작성 완료");
-          this.$router.push("/board");
-        })
-        .catch((error) => {
-          console.dir(error);
-          alert("공지사항 작성 실패. 확인해주세요.");
-        });
+      };
     },
-  },
-};
+    methods: {
+      writeArticle() {
+        const loginUser = JSON.parse(localStorage.getItem("loginUser"));
+        const user = loginUser.id;
+        this.article.user = user;
+        console.log(this.article);
+        axios({
+          method: "POST",
+          url: "http://localhost:8000/board",
+          headers: {
+            Authorization: loginUser.token,
+          },
+          data: this.article,
+        })
+          .then(() => {
+            alert("공지사항 작성 완료");
+            this.$router.push("/board");
+          })
+          .catch((error) => {
+            console.dir(error);
+            alert("공지사항 작성 실패. 확인해주세요.");
+          });
+      },
+    },
+  };
 </script>
 
 <style scoped>
-#board_write {
-  height: 600px;
-}
-.article__head {
-  padding: 10px;
-  border-bottom: 1px solid #e3e3eb;
-}
-.article__head__top {
-  justify-content: space-between;
-}
-.article__title {
-  font-size: 28px;
-}
-.article__time {
-  font-size: 12px;
-  color: gray;
-  display: flex;
-  align-items: flex-end;
-}
-.article__user {
-  font-size: 16px;
-  color: gray;
-}
-.article__content {
-  display: flex;
-  padding: 20px;
-  border-bottom: 1px solid #e3e7eb;
-  min-height: 200px;
-}
-input {
-  width: 100%;
-  border: none;
-}
-textarea {
-  width: 100%;
-  border: none;
-  resize: none;
-}
+  #board_write {
+    height: 600px;
+  }
+  .article__head {
+    padding: 10px;
+    border-bottom: 1px solid #e3e3eb;
+  }
+  .article__head__top {
+    justify-content: space-between;
+  }
+  .article__title {
+    font-size: 28px;
+  }
+  .article__time {
+    font-size: 12px;
+    color: gray;
+    display: flex;
+    align-items: flex-end;
+  }
+  .article__user {
+    font-size: 16px;
+    color: gray;
+  }
+  .article__content {
+    display: flex;
+    padding: 20px;
+    border-bottom: 1px solid #e3e7eb;
+    min-height: 200px;
+  }
+  input {
+    width: 100%;
+    border: none;
+  }
+  textarea {
+    width: 100%;
+    border: none;
+    resize: none;
+  }
 </style>

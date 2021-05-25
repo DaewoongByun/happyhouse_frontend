@@ -24,94 +24,94 @@
 </template>
 
 <script>
-import axios from "axios";
-import { mapGetters } from "vuex";
-export default {
-  name: "BoardModify",
-  data() {
-    return {
-      article: "",
-    };
-  },
-  created() {
-    this.getArticle(this.$route.params.no);
-  },
-  computed: {
-    ...mapGetters(["loginUser"]),
-  },
-  methods: {
-    getArticle(no) {
-      axios({
-        method: "get",
-        url: "http://localhost:8000/board/" + no,
-        headers: {
-          "Authorization": this.loginUser.token,
-        },
-      })
-        .then((Response) => {
-          //console.log(Response.data.article);
-          let article = Response.data.article;
-          let content = article.content;
-          let replaced_content = content.replace(/<br>/g, "\n");
-          article.content = replaced_content;
-          this.article = article;
-        })
-        .catch((error) => {
-          console.dir(error);
-        });
+  import axios from "axios";
+  import { mapGetters } from "vuex";
+  export default {
+    name: "BoardModify",
+    data() {
+      return {
+        article: "",
+      };
     },
-    modifyArticle() {
-      axios({
-        method: "put",
-        url: "http://localhost:8000/board/" + this.article.no,
-        data: this.article,
-        headers: {
-          "Authorization": this.loginUser.token,
-        },
-      })
-        .then(() => {
-          alert("수정되었습니다.");
-          this.$router.push(`/board/${this.article.no}`);
-        })
-        .catch((error) => {
-          console.dir(error);
-        });
+    created() {
+      this.getArticle(this.$route.params.no);
     },
-  },
-};
+    computed: {
+      ...mapGetters(["loginUser"]),
+    },
+    methods: {
+      getArticle(no) {
+        axios({
+          method: "get",
+          url: "http://localhost:8000/board/" + no,
+          headers: {
+            Authorization: this.loginUser.token,
+          },
+        })
+          .then((Response) => {
+            //console.log(Response.data.article);
+            let article = Response.data.article;
+            let content = article.content;
+            let replaced_content = content.replace(/<br>/g, "\n");
+            article.content = replaced_content;
+            this.article = article;
+          })
+          .catch((error) => {
+            console.dir(error);
+          });
+      },
+      modifyArticle() {
+        axios({
+          method: "put",
+          url: "http://localhost:8000/board/" + this.article.no,
+          data: this.article,
+          headers: {
+            Authorization: this.loginUser.token,
+          },
+        })
+          .then(() => {
+            alert("수정되었습니다.");
+            this.$router.push(`/board/${this.article.no}`);
+          })
+          .catch((error) => {
+            console.dir(error);
+          });
+      },
+    },
+  };
 </script>
 
 <style scoped>
-#Board_Article {
-  height: 600px;
-}
-input {
-  width: 100%;
-  border: none;
-}
-textarea {
-  width: 100%;
-  border: none;
-  resize: none;
-}
-.article__head {
-  padding: 10px;
-  border-bottom: 1px solid #e3e3eb;
-}
-.article__head__top {
-  justify-content: space-between;
-}
-.article__title {
-  font-size: 28px;
-}
-.article__user {
-  font-size: 16px;
-  color: gray;
-}
-.article__content {
-  display: flex;
-  padding: 20px;
-  border-bottom: 1px solid #e3e7eb;
-  min-height: 200px;
-}
+  #Board_Article {
+    height: 600px;
+  }
+  input {
+    width: 100%;
+    border: none;
+  }
+  textarea {
+    width: 100%;
+    border: none;
+    resize: none;
+  }
+  .article__head {
+    padding: 10px;
+    border-bottom: 1px solid #e3e3eb;
+  }
+  .article__head__top {
+    justify-content: space-between;
+  }
+  .article__title {
+    font-size: 28px;
+  }
+  .article__user {
+    font-size: 16px;
+    color: gray;
+  }
+  .article__content {
+    display: flex;
+    padding: 20px;
+    border-bottom: 1px solid #e3e7eb;
+    min-height: 200px;
+  }
 </style>

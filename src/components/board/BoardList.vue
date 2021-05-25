@@ -33,42 +33,46 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
-import BoardItem from "./BoardListItem";
-export default {
-  name: "BoardList",
-  data() {
-    return {
-      currentPage: 1,
-      perPage: 10,
-    };
-  },
-  computed: {
-    ...mapGetters(["boardlist", "boardlength"]),
-  },
-  components: {
-    BoardItem,
-  },
-  created() {
-    // console.log("boardList vue created");
-    this.getBoardList();
-  },
-  methods: {
-    ...mapActions(["getBoardList"]),
-  },
-};
+  import { mapGetters, mapActions } from "vuex";
+  import BoardItem from "./BoardListItem";
+  export default {
+    name: "BoardList",
+    data() {
+      return {
+        currentPage: 1,
+        perPage: 10,
+      };
+    },
+    computed: {
+      ...mapGetters(["boardlist", "boardlength"]),
+    },
+    components: {
+      BoardItem,
+    },
+    created() {
+      // console.log("boardList vue created");
+      this.getBoardList();
+    },
+    methods: {
+      ...mapActions(["getBoardList"]),
+    },
+  };
 </script>
 
 <style>
-#Board_List {
-  margin-top: 30px;
-  min-height: 600px;
-}
+  #Board_List {
+    margin-top: 30px;
+    min-height: 600px;
+  }
 
-.board__item:hover {
-  background-color: blue;
-}
-.board__title {
-  width: 600px;
-}
+  .board__item {
+    cursor: pointer;
+  }
+
+  .board__item:hover {
+    background-color: whitesmoke;
+  }
+  .board__title {
+    width: 600px;
+  }
 </style>

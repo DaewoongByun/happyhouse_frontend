@@ -29,25 +29,27 @@
 </template>
 
 <script>
-export default {
-  name: "HouseDealItem",
-  props: ["housedeal", "dealType"],
-};
+  export default {
+    name: "HouseDealItem",
+    props: ["housedeal", "dealType"],
+  };
 </script>
 
 <style scoped>
-#house-deal-item {
-  width: 100%;
-  height: 120px;
-  flex-direction: column;
-  border-bottom: 1px solid rgba(27, 31, 35, 0.15);
-  padding: 5px;
-  align-items: flex-start;
-}
-.small {
-  font-size: 12px;
-}
-img {
-  width: 20px;
-}
+  #house-deal-item {
+    width: 98%;
+    height: 120px;
+    flex-direction: column;
+    padding: 5px;
+    align-items: flex-start;
+    box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
+    padding: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 3px;
+    margin-right: 3px;
+  }
+  .small {
+    font-size: 12px;
+  }
 </style>

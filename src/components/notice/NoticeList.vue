@@ -33,42 +33,45 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
-import NoticeItem from "./NoticeListItem";
-export default {
-  name: "NoticeList",
-  data() {
-    return {
-      currentPage: 1,
-      perPage: 10,
-    };
-  },
-  computed: {
-    ...mapGetters(["noticelist", "noticelength"]),
-  },
-  components: {
-    NoticeItem,
-  },
-  created() {
-    console.log("noticeList vue created");
-    this.getNoticeList();
-  },
-  methods: {
-    ...mapActions(["getNoticeList"]),
-  },
-};
+  import { mapGetters, mapActions } from "vuex";
+  import NoticeItem from "./NoticeListItem";
+  export default {
+    name: "NoticeList",
+    data() {
+      return {
+        currentPage: 1,
+        perPage: 10,
+      };
+    },
+    computed: {
+      ...mapGetters(["noticelist", "noticelength"]),
+    },
+    components: {
+      NoticeItem,
+    },
+    created() {
+      console.log("noticeList vue created");
+      this.getNoticeList();
+    },
+    methods: {
+      ...mapActions(["getNoticeList"]),
+    },
+  };
 </script>
 
 <style>
-#Notice_List {
-  margin-top: 30px;
-  min-height: 600px;
-}
+  #Notice_List {
+    margin-top: 30px;
+    min-height: 600px;
+  }
 
-.Notice__item:hover {
-  background-color: blue;
-}
-.Notice__title {
-  width: 600px;
-}
+  .Notice__item {
+    cursor: pointer;
+  }
+  .Notice__item:hover {
+    background-color: whitesmoke;
+  }
+  .Notice__title {
+    width: 600px;
+  }
 </style>

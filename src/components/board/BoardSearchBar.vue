@@ -11,54 +11,55 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
-export default {
-  name: "BoardSearchBar",
-  data() {
-    return {
-      key: "title",
-      word: "",
-    };
-  },
-  methods: {
-    ...mapActions(["getBoardList"]),
-    searchWord() {
-      const map = {
-        key: this.key,
-        word: this.word,
+  import { mapActions } from "vuex";
+  export default {
+    name: "BoardSearchBar",
+    data() {
+      return {
+        key: "title",
+        word: "",
       };
-      if (this.word.length > 0) {
-        this.getBoardList(map);
-      } else {
-        this.getBoardList();
-      }
-      this.word = "";
     },
-  },
-};
+    methods: {
+      ...mapActions(["getBoardList"]),
+      searchWord() {
+        this.$router.push("/board");
+        const map = {
+          key: this.key,
+          word: this.word,
+        };
+        if (this.word.length > 0) {
+          this.getBoardList(map);
+        } else {
+          this.getBoardList();
+        }
+        this.word = "";
+      },
+    },
+  };
 </script>
 
 <style scoped>
-#NoticeSearchBar {
-  margin-top: 20px;
-}
-input {
-  height: 40px;
-  width: 70%;
-}
-.SearchSelector {
-  height: 40px;
-  width: 100px;
-}
-button {
-  height: 40px;
-  width: 70px;
-  background-color: #e7e7e7;
-  border-radius: 8px;
-  transition-duration: 0.2s;
-}
-button:hover {
-  background-color: #4caf50; /* Green */
-  color: white;
-}
+  #NoticeSearchBar {
+    margin-top: 20px;
+  }
+  input {
+    height: 40px;
+    width: 70%;
+  }
+  .SearchSelector {
+    height: 40px;
+    width: 100px;
+  }
+  button {
+    height: 40px;
+    width: 70px;
+    background-color: #e7e7e7;
+    border-radius: 8px;
+    transition-duration: 0.2s;
+  }
+  button:hover {
+    background-color: #4caf50; /* Green */
+    color: white;
+  }
 </style>
