@@ -44,172 +44,173 @@
 </template>
 
 <script>
-import SearchBar from "../components/home/SearchBar";
-import NoticeList from "../components/notice/NoticeList";
-import BoardList from "../components/board/BoardList";
-export default {
-  name: "Home",
-  components: {
-    SearchBar,
-    NoticeList,
-    BoardList,
-  },
-  data() {
-    return {
-      y: 0,
-    };
-  },
-  methods: {
-    handleScroll() {
-      this.y = window.scrollY;
-      if (this.y > 0) {
-        this.$refs.homeText.classList.add("disappear");
-        this.$refs.homeText.classList.add("invisible");
-      } else {
-        this.$refs.homeText.classList.remove("invisible");
-        this.$refs.homeText.classList.remove("disappear");
-        this.$refs.homeText.classList.add("appear");
-      }
+  import SearchBar from "../components/home/SearchBar";
+  import NoticeList from "../components/notice/NoticeList";
+  import BoardList from "../components/board/BoardList";
+  export default {
+    name: "Home",
+    components: {
+      SearchBar,
+      NoticeList,
+      BoardList,
     },
-  },
-  mounted() {
-    window.addEventListener("scroll", this.handleScroll);
-  },
-  destroyed() {
-    window.removeEventListener("scroll", this.handleScroll);
-  },
-};
+    data() {
+      return {
+        y: 0,
+      };
+    },
+    methods: {
+      handleScroll() {
+        this.y = window.scrollY;
+        if (this.y > 0) {
+          this.$refs.homeText.classList.add("disappear");
+          this.$refs.homeText.classList.add("invisible");
+        } else {
+          this.$refs.homeText.classList.remove("invisible");
+          this.$refs.homeText.classList.remove("disappear");
+          this.$refs.homeText.classList.add("appear");
+        }
+      },
+    },
+    mounted() {
+      window.addEventListener("scroll", this.handleScroll);
+    },
+    destroyed() {
+      window.removeEventListener("scroll", this.handleScroll);
+    },
+  };
 </script>
 
 <style scoped>
-#home {
-  min-height: 1000px;
-  width: 100%;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-.home__searchbar {
-  height: 50px;
-  width: 100%;
-}
+  #home {
+    min-height: 1000px;
+    width: 100%;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .home__searchbar {
+    height: 50px;
+    width: 100%;
+  }
 
-.img {
-  width: 100%;
-  height: 1000px;
-  background-image: url("../assets/house/wallpaper6.jpg");
-  transition-duration: 1s;
-  position: fixed;
-  top: 0;
-}
-.small-img {
-  width: 1200px;
-  height: 360px;
-  background-image: url("../assets/house/wallpaper6.jpg");
-  transition-duration: 1s;
-}
-.arrow {
-  position: fixed;
-  bottom: 50px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-.invisible2 {
-  display: none;
-}
-.invisible {
-  display: none;
-  transition-delay: 0.8s;
-}
-.home-text__title {
-  font-size: 50px;
-}
-.home-text__sub {
-  font-size: 30px;
-}
-.home-text {
-  position: fixed;
-  left: 100px;
-  top: 20%;
-  color: black;
-  font-weight: 600;
-  display: flex;
-  flex-direction: column;
-}
-.appear {
-  animation: fade-in 0.8s;
-  animation-fill-mode: forwards;
-  display: flex;
-}
+  .img {
+    width: 100%;
+    height: 1000px;
+    background-image: url("../assets/house/wallpaper6.jpg");
+    transition-duration: 1s;
+    position: fixed;
+    top: 0;
+  }
+  .small-img {
+    width: 1200px;
+    height: 360px;
+    background-image: url("../assets/house/wallpaper6.jpg");
+    transition-duration: 1s;
+  }
+  .arrow {
+    position: fixed;
+    bottom: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .invisible2 {
+    display: none;
+  }
+  .invisible {
+    display: none;
+    transition-delay: 0.8s;
+  }
+  .home-text__title {
+    font-size: 50px;
+    text-shadow: 2px 1px 0px white;
+  }
+  .home-text__sub {
+    font-size: 30px;
+  }
+  .home-text {
+    position: fixed;
+    left: 100px;
+    top: 20%;
+    color: black;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+  }
+  .appear {
+    animation: fade-in 0.8s;
+    animation-fill-mode: forwards;
+    display: flex;
+  }
 
-.disappear {
-  animation: fade-out 0.8s;
-  animation-fill-mode: forwards;
-}
-@keyframes fade-in {
-  from {
-    opacity: 0;
+  .disappear {
+    animation: fade-out 0.8s;
+    animation-fill-mode: forwards;
   }
-  to {
-    opacity: 1;
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
-}
 
-@keyframes fade-out {
-  from {
-    opacity: 1;
+  @keyframes fade-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
   }
-  to {
-    opacity: 0;
+  .home__logo__icon {
+    margin: 90px;
   }
-}
-.home__logo__icon {
-  margin: 90px;
-}
-.logo__icon {
-  height: 100px;
-}
-.home__board {
-  width: 1500px;
-}
-.home__list {
-  margin: 20px;
-  flex: 5;
-}
-.slide-in-elliptic-top-fwd {
-  -webkit-animation: slide-in-elliptic-top-fwd 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  animation: slide-in-elliptic-top-fwd 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-}
-@-webkit-keyframes slide-in-elliptic-top-fwd {
-  0% {
-    -webkit-transform: translateY(-600px) rotateX(-30deg) scale(0);
-    transform: translateY(-600px) rotateX(-30deg) scale(0);
-    -webkit-transform-origin: 50% 100%;
-    transform-origin: 50% 100%;
-    opacity: 0;
+  .logo__icon {
+    height: 100px;
   }
-  100% {
-    -webkit-transform: translateY(0) rotateX(0) scale(1);
-    transform: translateY(0) rotateX(0) scale(1);
-    -webkit-transform-origin: 50% 1400px;
-    transform-origin: 50% 1400px;
-    opacity: 1;
+  .home__board {
+    width: 1500px;
   }
-}
-@keyframes slide-in-elliptic-top-fwd {
-  0% {
-    -webkit-transform: translateY(-600px) rotateX(-30deg) scale(0);
-    transform: translateY(-600px) rotateX(-30deg) scale(0);
-    -webkit-transform-origin: 50% 100%;
-    transform-origin: 50% 100%;
-    opacity: 0;
+  .home__list {
+    margin: 20px;
+    flex: 5;
   }
-  100% {
-    -webkit-transform: translateY(0) rotateX(0) scale(1);
-    transform: translateY(0) rotateX(0) scale(1);
-    -webkit-transform-origin: 50% 1400px;
-    transform-origin: 50% 1400px;
-    opacity: 1;
+  .slide-in-elliptic-top-fwd {
+    -webkit-animation: slide-in-elliptic-top-fwd 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    animation: slide-in-elliptic-top-fwd 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   }
-}
+  @-webkit-keyframes slide-in-elliptic-top-fwd {
+    0% {
+      -webkit-transform: translateY(-600px) rotateX(-30deg) scale(0);
+      transform: translateY(-600px) rotateX(-30deg) scale(0);
+      -webkit-transform-origin: 50% 100%;
+      transform-origin: 50% 100%;
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateY(0) rotateX(0) scale(1);
+      transform: translateY(0) rotateX(0) scale(1);
+      -webkit-transform-origin: 50% 1400px;
+      transform-origin: 50% 1400px;
+      opacity: 1;
+    }
+  }
+  @keyframes slide-in-elliptic-top-fwd {
+    0% {
+      -webkit-transform: translateY(-600px) rotateX(-30deg) scale(0);
+      transform: translateY(-600px) rotateX(-30deg) scale(0);
+      -webkit-transform-origin: 50% 100%;
+      transform-origin: 50% 100%;
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateY(0) rotateX(0) scale(1);
+      transform: translateY(0) rotateX(0) scale(1);
+      -webkit-transform-origin: 50% 1400px;
+      transform-origin: 50% 1400px;
+      opacity: 1;
+    }
+  }
 </style>
