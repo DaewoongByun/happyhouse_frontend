@@ -1,5 +1,5 @@
 <template>
-  <div id="search-bar" class="container flex-box">
+  <div id="search-bar" class="flex-box">
     <input
       type="text"
       @keyup="change"
@@ -78,32 +78,37 @@ export default {
 </script>
 
 <style scoped>
-#search-bar {
-  margin-top: 20px;
-  flex-direction: column;
-  width: 100%;
-}
-input {
-  height: 40px;
-  width: 70%;
-}
-.list-container {
-  width: 70%;
-  padding: 0px 10px;
-  box-sizing: border-box;
-  max-height: 200px;
-  overflow-y: auto;
-  background-color: white;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-}
-.list-item {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.24);
-  height: 50px;
-  justify-content: flex-start;
-  margin-bottom: 5px;
-  cursor: pointer;
-}
-.list-item:hover {
-  background-color: whitesmoke;
-}
+  #search-bar {
+    margin-top: 20px;
+    flex-direction: column;
+    width: 100%;
+  }
+  input {
+    height: 40px;
+    width: 70%;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+  input:focus {
+    outline: none;
+  }
+  .list-container {
+    width: 70%;
+    padding: 0px 10px;
+    box-sizing: border-box;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+  .list-item {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.24);
+    height: 50px;
+    justify-content: flex-start;
+    margin-bottom: 5px;
+    cursor: pointer;
+  }
+  .list-item:hover {
+    background-color: whitesmoke;
+  }
 </style>
