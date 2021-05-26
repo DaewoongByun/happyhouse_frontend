@@ -8,11 +8,11 @@
     <div class="reply__bottom flex-box">
       <div class="reply__user">{{ item.user }}</div>
       <div class="reply__regdate">{{ item.regdate }}</div>
-      <div class="reply__btn flex-box" v-if="checkMe()">
+      <div class="reply__btn flex-box">
         <a href="" v-if="checkMe()" @click.prevent="doModifyReply">수정</a>
         <a href="" v-if="item.upNo == 0" @click.prevent="addReply">답글</a>
 
-        <a href="" @click.prevent="deleteReply" class="delete__reply">삭제</a>
+        <a href="" @click.prevent="deleteReply" v-if="checkMe()" class="delete__reply">삭제</a>
       </div>
     </div>
     <div v-if="openflag">

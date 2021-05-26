@@ -135,8 +135,8 @@ export default new Vuex.Store({
           let score1 = 0;
           let score2 = 0;
           for (let i = 0; i < rank.length; i++) {
-            score1 = score1 + scores1[`${rank[0]}score`] * Math.pow(1000, 2 - i);
-            score2 = score2 + scores2[`${rank[0]}score`] * Math.pow(1000, 2 - i);
+            score1 = score1 + scores1[`${rank[i]}score`] * Math.pow(1000, 2 - i);
+            score2 = score2 + scores2[`${rank[i]}score`] * Math.pow(1000, 2 - i);
           }
           console.log("score1 : " + score1);
           console.log("score2 : " + score2);
@@ -300,7 +300,7 @@ export default new Vuex.Store({
       commit("LOGOUT");
     },
     getNoticeList({ commit, state }, params = null) {
-      //console.log("getNoticeList");
+      // console.log(state.loginUser.token);
       axios({
         method: "get",
         url: "http://localhost:8000/notice",
