@@ -5,7 +5,7 @@
         <input type="text" placeholder="아이디" v-model="id" />
       </div>
       <div class="input-container flex-box">
-        <input type="password" placeholder="패스워드" v-model="password" />
+        <input type="password" placeholder="패스워드" v-model="password" @keyup.enter="doLogin" />
       </div>
       <div class="button-container flex-box">
         <button class="button" @click="doLogin">로그인</button>
