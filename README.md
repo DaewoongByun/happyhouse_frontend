@@ -1,29 +1,38 @@
-# happyhouse
+# 🏠 Happy House
 
-## Project setup
 
-```
-npm install
-```
 
-### Compiles and hot-reloads for development
+## 사용 기술
 
-```
-npm run serve
-```
+- front-end
+  - vue.js
+  - vue-router
+  - vuex
+  - bootstrap
 
-### Compiles and minifies for production
+- back-end
+  - spring boot
+  - mysql
+  - https://github.com/Rain3321/happyhouse_backend
 
-```
-npm run build
-```
 
-### Lints and fixes files
 
-```
-npm run lint
-```
+## 사용한 API
 
-### Customize configuration
+- 국토교통부 아파트 전월세 자료
+- 국토교통부 연립다세대 전월세 자료
+- 국토교통부 연립다세대 매매 실거래 자료
+- 국토교통부 아파트매매 실거래 자료
+- 카카오 지도/로컬
 
-See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+## 구현한 기능
+
+- 회원관리
+- 공지사항, 자유게시판
+- 동 별 주택 정보 검색 
+- 주택 거래 정보 제공
+- kakao api 주변 상권 정보를 이용한 주택 비교
+- 관심 주택 설정
+

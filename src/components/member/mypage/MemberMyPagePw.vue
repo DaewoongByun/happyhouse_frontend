@@ -61,12 +61,12 @@ export default {
       })
         .then((response) => {
           alert("수정 완료");
-          //console.log(response);
+          console.log(response);
           this.logout();
           this.$router.push("/");
         })
         .catch((error) => {
-          //console.log(error);
+          console.log(error);
           alert("비밀번호를 확인하세요");
           this.inputClear();
         });
