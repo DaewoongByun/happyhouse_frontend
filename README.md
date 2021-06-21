@@ -36,3 +36,29 @@
 - kakao api 주변 상권 정보를 이용한 주택 비교
 - 관심 주택 설정
 
+
+
+## 주요기능
+
+- 홈화면
+
+![홈화면](https://user-images.githubusercontent.com/19249951/122716082-c6fef800-d2a4-11eb-8896-89ee456a4ac3.gif)
+
+
+
+- 매매 검색
+
+![매매검색](https://user-images.githubusercontent.com/19249951/122716079-c6666180-d2a4-11eb-81a7-b9290cfa952d.gif)
+
+
+
+- 비교 페이지
+
+![비교페이지](https://user-images.githubusercontent.com/19249951/122716084-c6fef800-d2a4-11eb-91df-7dc9e9b190dc.gif)
+
+- 관심 주택
+
+![관심주택](https://user-images.githubusercontent.com/19249951/122716076-c49c9e00-d2a4-11eb-9284-ae875d53409d.gif)
+
+
+
